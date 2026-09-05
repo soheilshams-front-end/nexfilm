@@ -1,0 +1,20 @@
+{
+  "id": "example-film",
+  "title": "فیلم نمونه",
+  "titleEn": "Example Film",
+  "tagline": "یک خط تبلیغ",
+  "description": "خلاصه داستان کوتاه.",
+  "poster": "/posters/echoes.png",
+  "backdrop": "/backdrops/echoes.png",
+  "year": 2024,
+  "rating": 7.5,
+  "maturity": "+۱۳",
+  "duration": "۹۰ دقیقه",
+  "genres": ["درام"],
+  "cast": ["بازیگر"],
+  "director": "کارگردان",
+  "type": "Film",
+  "match": 85,
+  "videoUrl": "/videos/example-film.mp4",
+  "isNew": true
+}

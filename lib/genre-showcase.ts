@@ -1,0 +1,25 @@
+/** Featured title for each browse genre — posters live in /saintstream/posters */
+
+export const GENRE_SHOWCASE: { genre: string; titleId: string }[] = [
+  { genre: 'اکشن', titleId: 'mad-max-fury-road' },
+  { genre: 'انیمیشن', titleId: 'spider-verse-into' },
+  { genre: 'تاریخی', titleId: 'gladiator' },
+  { genre: 'ترسناک', titleId: 'the-conjuring' },
+  { genre: 'جنایی', titleId: 'the-godfather' },
+  { genre: 'جنگی', titleId: 'saving-private-ryan' },
+  { genre: 'خانوادگی', titleId: 'home-alone' },
+  { genre: 'درام', titleId: 'shawshank-redemption' },
+  { genre: 'سایبرپانک', titleId: 'blade-runner-2049' },
+  { genre: 'عاشقانه', titleId: 'titanic' },
+  { genre: 'علمی-تخیلی', titleId: 'interstellar' },
+  { genre: 'علمی‌تخیلی', titleId: 'the-matrix' },
+  { genre: 'فانتزی', titleId: 'lotr-fellowship' },
+  { genre: 'کمدی', titleId: 'the-hangover' },
+  { genre: 'کمدی سیاه', titleId: 'wolf-of-wall-street' },
+  { genre: 'ماجراجویی', titleId: 'raiders-lost-ark' },
+  { genre: 'معمایی', titleId: 'shutter-island' },
+  { genre: 'ورزشی', titleId: 'rocky' },
+  { genre: 'وسترن', titleId: 'django-unchained' },
+  { genre: 'هیجان', titleId: 'se7en' },
+  { genre: 'هیجان‌انگیز', titleId: 'the-dark-knight' },
+]
