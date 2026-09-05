@@ -128,9 +128,9 @@ export type NewEpisode = {
 }
 
 const backdrops = {
-  echoes: '/backdrops/echoes.png',
-  neon: '/backdrops/neon.png',
-  horizon: '/backdrops/horizon.png',
+  echoes: '/backdrops/echoes.webp',
+  neon: '/backdrops/neon.webp',
+  horizon: '/backdrops/horizon.webp',
 }
 
 /** Creative Commons sample clips (Google-hosted) for dev/test playback */
@@ -211,7 +211,7 @@ export const movies: Movie[] = [
     tagline: 'آینده، همه‌چیز را به یاد می‌آورد.',
     description:
       'ستاره‌شناسی سرگردان بنای باستانی‌ای را کشف می‌کند که خاطرات تمدنی را پخش می‌کند که هنوز متولد نشده. هنگامی که پیام‌ها قوی‌تر می‌شوند، او باید تصمیم بگیرد که آیا به آینده‌ای پاسخ دهد که ممکن است گذشته‌اش را پاک کند یا خیر.',
-    poster: '/posters/echoes.png',
+    poster: '/posters/echoes.webp',
     backdrop: backdrops.echoes,
     year: 2025,
     rating: 8.9,
@@ -236,7 +236,7 @@ export const movies: Movie[] = [
     tagline: 'در شهری که هرگز نمی‌خوابد، کسی باید بیدار بماند.',
     description:
       'کارآگاهی فرسوده در تعقیب شبحی از دل زیرشهر بارانی و نئون‌پوش، جایی که هر انعکاسی دروغی را پنهان می‌کند و خاطره خودش به فروش می‌رسد.',
-    poster: '/posters/neon.png',
+    poster: '/posters/neon.webp',
     backdrop: backdrops.neon,
     year: 2024,
     rating: 8.4,
@@ -257,7 +257,7 @@ export const movies: Movie[] = [
     tagline: 'دریا رازهای خودش را نگه می‌دارد.',
     description:
       'وقتی ماهیگیری تنها در سواحل ناپدید می‌شود، دخترش برای بازگرداندنش به خانه، وارد طوفانی از حقیقت‌های مدفون خانوادگی می‌شود؛ پیش از آنکه جذر و مد برای همیشه برگردد.',
-    poster: '/posters/horizon.png',
+    poster: '/posters/horizon.webp',
     backdrop: backdrops.horizon,
     year: 2023,
     rating: 8.1,
@@ -277,7 +277,7 @@ export const movies: Movie[] = [
     tagline: 'هر افسانه‌ای در غبار به پایان می‌رسد.',
     description:
       'تفنگچی بازنشسته‌ای برای تسویه آخرین حساب به شهر مرزی در حال مرگی بازمی‌گردد، اما می‌بیند گذشته در لبه افقی خون‌رنگ به انتظار او نشسته است.',
-    poster: '/posters/crimson.png',
+    poster: '/posters/crimson.webp',
     backdrop: backdrops.echoes,
     year: 2024,
     rating: 7.9,
@@ -297,7 +297,7 @@ export const movies: Movie[] = [
     tagline: 'فراتر از آخرین ستاره، چیزی در انتظار است.',
     description:
       'خدمه یک کشتی نجات فضاییِ ژرف، فراخوان اضطراری را از سیاره‌ای دریافت می‌کنند که نباید وجود داشته باشد؛ رو به کشفی می‌روند که معنای انسان بودن را دگرگون می‌کند.',
-    poster: '/posters/afterlight.png',
+    poster: '/posters/afterlight.webp',
     backdrop: backdrops.echoes,
     year: 2025,
     rating: 8.6,
@@ -318,7 +318,7 @@ export const movies: Movie[] = [
     tagline: 'برخی نورها هرگز خاموش نمی‌شوند.',
     description:
       'دو غریبه در جشنواره‌ای تابستانی با هم آشنا می‌شوند و شبی را با هم می‌گذرانند که طنینش در دو دهه، دو شهر و هر انتخابی در میان آن‌ها پیچیده خواهد شد.',
-    poster: '/posters/lanterns.png',
+    poster: '/posters/lanterns.webp',
     backdrop: backdrops.neon,
     year: 2023,
     rating: 8.3,
@@ -337,7 +337,7 @@ export const movies: Movie[] = [
     tagline: 'هیچ زرهی به اندازه کافی ضخیم نیست.',
     description:
       'سرباز ویژه‌ای در خط مقدم دشمن رها می‌شود و باید از میان آتش و خیانت بجنگد تا فرماندهی‌ای را که یگانش را قربانی کرد، افشا کند.',
-    poster: '/posters/ironclad.png',
+    poster: '/posters/ironclad.webp',
     backdrop: backdrops.echoes,
     year: 2024,
     rating: 7.7,
@@ -356,7 +356,7 @@ export const movies: Movie[] = [
     tagline: 'هر پرونده‌ای جسدی را پنهان می‌کند.',
     description:
       'کارمند ظریف آرشیو، توطئه‌ای دهه‌سال‌ه در دل بایگانی شهر کشف می‌کند و تنها کسی می‌شود که می‌تواند آن را ثابت کند — یا نام بعدی باشد که ناپدید می‌شود.',
-    poster: '/posters/archive.png',
+    poster: '/posters/archive.webp',
     backdrop: backdrops.neon,
     year: 2025,
     rating: 8.0,
@@ -377,7 +377,7 @@ export const movies: Movie[] = [
     tagline: 'جستجویی که تمام نمی‌شود.',
     description:
       'دختری جوان در جستجوی اژدهایی که روزی پرورش داده — انیمیشن کوتاه متن‌باز Blender Foundation، مناسب تست پخش واقعی.',
-    poster: '/posters/echoes.png',
+    poster: '/posters/echoes.webp',
     backdrop: backdrops.horizon,
     year: 2010,
     rating: 8.2,
@@ -399,7 +399,7 @@ export const movies: Movie[] = [
     tagline: 'یک ماجرای جنگلی با حجم کم.',
     description:
       'انیمیشن کوتاه متن‌باز Blender — فایل تست کم‌حجم برای پخش mp4 در Nex Film.',
-    poster: '/posters/lanterns.png',
+    poster: '/posters/lanterns.webp',
     backdrop: backdrops.horizon,
     year: 2008,
     rating: 7.8,
@@ -420,7 +420,7 @@ export const movies: Movie[] = [
     tagline: 'علمی‌تخیلی live-action کوتاه.',
     description:
       'فیلم کوتاه VFX از Blender Foundation — تست پخش با کیفیت بالاتر و مدت بیشتر.',
-    poster: '/posters/ironclad.png',
+    poster: '/posters/ironclad.webp',
     backdrop: backdrops.echoes,
     year: 2012,
     rating: 7.5,
@@ -440,7 +440,7 @@ export const movies: Movie[] = [
     tagline: 'اولین پروژه متن‌باز Open Movie.',
     description:
       'انیمیشن سورreal کوتاه — یکی دیگر از نمونه‌های رسمی برای تست پلیر.',
-    poster: '/posters/neon.png',
+    poster: '/posters/neon.webp',
     backdrop: backdrops.neon,
     year: 2006,
     rating: 7.2,
@@ -487,21 +487,21 @@ export const episodes = [
 ]
 
 export const actors: Actor[] = [
-  { id: 'a1', name: 'نائومی وِیل', role: 'بازیگر نقش اول زن', photo: '/actors/a1.png', films: 32 },
-  { id: 'a2', name: 'الیاس کُر', role: 'بازیگر نقش اول مرد', photo: '/actors/a2.png', films: 41 },
-  { id: 'a3', name: 'ماریسول چن', role: 'بازیگر مکمل', photo: '/actors/a3.png', films: 27 },
-  { id: 'a4', name: 'دِو اشکرافت', role: 'بازیگر مکمل', photo: '/actors/a4.png', films: 19 },
-  { id: 'a5', name: 'ریس کالووی', role: 'بازیگر نقش اول مرد', photo: '/actors/a5.png', films: 35 },
-  { id: 'a6', name: 'سوکی تاناکا', role: 'بازیگر نقش اول زن', photo: '/actors/a6.png', films: 24 },
+  { id: 'a1', name: 'نائومی وِیل', role: 'بازیگر نقش اول زن', photo: '/actors/a1.webp', films: 32 },
+  { id: 'a2', name: 'الیاس کُر', role: 'بازیگر نقش اول مرد', photo: '/actors/a2.webp', films: 41 },
+  { id: 'a3', name: 'ماریسول چن', role: 'بازیگر مکمل', photo: '/actors/a3.webp', films: 27 },
+  { id: 'a4', name: 'دِو اشکرافت', role: 'بازیگر مکمل', photo: '/actors/a4.webp', films: 19 },
+  { id: 'a5', name: 'ریس کالووی', role: 'بازیگر نقش اول مرد', photo: '/actors/a5.webp', films: 35 },
+  { id: 'a6', name: 'سوکی تاناکا', role: 'بازیگر نقش اول زن', photo: '/actors/a6.webp', films: 24 },
 ]
 
 export const castMembers: CastMember[] = [
-  { id: 'c1', name: 'نائومی وِیل', role: 'بازیگر نقش اول زن', character: 'دکتر لیا وِنس', photo: '/actors/a1.png' },
-  { id: 'c2', name: 'الیاس کُر', role: 'بازیگر نقش اول مرد', character: 'کاپیتان اِرو کُر', photo: '/actors/a2.png' },
-  { id: 'c3', name: 'ماریسول چن', role: 'بازیگر مکمل', character: 'سارا', photo: '/actors/a3.png' },
-  { id: 'c4', name: 'دِو اشکرافت', role: 'بازیگر مکمل', character: 'مارتین', photo: '/actors/a4.png' },
-  { id: 'c5', name: 'ریس کالووی', role: 'بازیگر نقش اول مرد', character: 'کارآگاه هِل', photo: '/actors/a5.png' },
-  { id: 'c6', name: 'سوکی تاناکا', role: 'بازیگر نقش اول زن', character: 'کیکو', photo: '/actors/a6.png' },
+  { id: 'c1', name: 'نائومی وِیل', role: 'بازیگر نقش اول زن', character: 'دکتر لیا وِنس', photo: '/actors/a1.webp' },
+  { id: 'c2', name: 'الیاس کُر', role: 'بازیگر نقش اول مرد', character: 'کاپیتان اِرو کُر', photo: '/actors/a2.webp' },
+  { id: 'c3', name: 'ماریسول چن', role: 'بازیگر مکمل', character: 'سارا', photo: '/actors/a3.webp' },
+  { id: 'c4', name: 'دِو اشکرافت', role: 'بازیگر مکمل', character: 'مارتین', photo: '/actors/a4.webp' },
+  { id: 'c5', name: 'ریس کالووی', role: 'بازیگر نقش اول مرد', character: 'کارآگاه هِل', photo: '/actors/a5.webp' },
+  { id: 'c6', name: 'سوکی تاناکا', role: 'بازیگر نقش اول زن', character: 'کیکو', photo: '/actors/a6.webp' },
 ]
 
 export const crewMembers: CrewMember[] = [
@@ -515,29 +515,29 @@ export const crewMembers: CrewMember[] = [
 
 export const reviews: Review[] = [
   {
-    id: 'r1', author: 'سارا م.', avatar: '/actors/a3.png', rating: 9, date: '۲ هفته پیش',
+    id: 'r1', author: 'سارا م.', avatar: '/actors/a3.webp', rating: 9, date: '۲ هفته پیش',
     content: 'یکی از زیباترین فیلم‌های علمی‌تخیلی سال. تصویربرداری نفس‌گیر و داستانی که تا انتها شما را درگیر نگه می‌دارد.',
     helpful: 248,
   },
   {
-    id: 'r2', author: 'آرش ر.', avatar: '/actors/a2.png', rating: 8, date: '۱ ماه پیش',
+    id: 'r2', author: 'آرش ر.', avatar: '/actors/a2.webp', rating: 8, date: '۱ ماه پیش',
     content: 'فضاسازی فوق‌العاده و بازی‌های درخشان. پایان‌بندی هوشمندانه بود و انتظار دنباله را دارم.',
     helpful: 156,
   },
   {
-    id: 'r3', author: 'مریم ک.', avatar: '/actors/a6.png', rating: 10, date: '۳ روز پیش',
+    id: 'r3', author: 'مریم ک.', avatar: '/actors/a6.webp', rating: 10, date: '۳ روز پیش',
     content: 'شاهکاری در روایت‌گری. موسیقی و جلوه‌های ویژه بی‌نقص بودند. حتماً تماشا کنید.',
     helpful: 92,
   },
 ]
 
 export const screenshots: Screenshot[] = [
-  { id: 's1', src: '/backdrops/echoes.png', caption: 'صحنه افتتاحیه — بنای باستانی' },
-  { id: 's2', src: '/backdrops/neon.png', caption: 'شهر نئونی — تعقیب و گریز' },
-  { id: 's3', src: '/backdrops/horizon.png', caption: 'ساحل خاموش — لحظه وداع' },
-  { id: 's4', src: '/posters/echoes.png', caption: 'پوستر بین‌المللی' },
-  { id: 's5', src: '/posters/neon.png', caption: 'پوستر تبلیغاتی' },
-  { id: 's6', src: '/posters/horizon.png', caption: 'پوستر جایگزین' },
+  { id: 's1', src: '/backdrops/echoes.webp', caption: 'صحنه افتتاحیه — بنای باستانی' },
+  { id: 's2', src: '/backdrops/neon.webp', caption: 'شهر نئونی — تعقیب و گریز' },
+  { id: 's3', src: '/backdrops/horizon.webp', caption: 'ساحل خاموش — لحظه وداع' },
+  { id: 's4', src: '/posters/echoes.webp', caption: 'پوستر بین‌المللی' },
+  { id: 's5', src: '/posters/neon.webp', caption: 'پوستر تبلیغاتی' },
+  { id: 's6', src: '/posters/horizon.webp', caption: 'پوستر جایگزین' },
 ]
 
 export const seriesSeasons: Record<string, Season[]> = {
@@ -551,7 +551,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'سیگنال',
           duration: '۵۸ دقیقه',
           description: 'خدمه اولین پخش را دریافت می‌کنند.',
-          thumbnail: '/backdrops/echoes.png',
+          thumbnail: '/backdrops/echoes.webp',
           videoUrl: sampleVideos.sintel,
         },
         {
@@ -559,7 +559,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'چاه گرانش',
           duration: '۵۲ دقیقه',
           description: 'کشتی به سمت سیاره غیرممکن کشیده می‌شود.',
-          thumbnail: '/backdrops/neon.png',
+          thumbnail: '/backdrops/neon.webp',
           videoUrl: sampleVideos.forBiggerBlazes,
         },
         {
@@ -567,7 +567,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'فرود',
           duration: '۱ ساعت ۰۱ دقیقه',
           description: 'گروه فرود وارد طوفان‌های سطح می‌شود.',
-          thumbnail: '/backdrops/horizon.png',
+          thumbnail: '/backdrops/horizon.webp',
           videoUrl: sampleVideos.bigBuckBunny,
         },
       ],
@@ -581,7 +581,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'بازگشت',
           duration: '۵۴ دقیقه',
           description: 'خدمه به خانه بازمی‌گردند.',
-          thumbnail: '/backdrops/neon.png',
+          thumbnail: '/backdrops/neon.webp',
           videoUrl: sampleVideos.tearsOfSteel,
         },
         {
@@ -589,7 +589,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'شکاف',
           duration: '۴۹ دقیقه',
           description: 'گذشته و حال در هم می‌آمیزد.',
-          thumbnail: '/backdrops/echoes.png',
+          thumbnail: '/backdrops/echoes.webp',
           videoUrl: sampleVideos.elephantsDream,
         },
       ],
@@ -605,7 +605,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'پرونده گمشده',
           duration: '۴۸ دقیقه',
           description: 'اولین سرنخ در بایگانی نیمه‌شب.',
-          thumbnail: '/backdrops/neon.png',
+          thumbnail: '/backdrops/neon.webp',
           videoUrl: sampleVideos.sintel,
         },
         {
@@ -613,7 +613,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'سایه‌های بایگانی',
           duration: '۵۱ دقیقه',
           description: 'هر پرونده جسدی را پنهان می‌کند.',
-          thumbnail: '/backdrops/echoes.png',
+          thumbnail: '/backdrops/echoes.webp',
           videoUrl: sampleVideos.bigBuckBunny,
         },
       ],
@@ -627,7 +627,7 @@ export const seriesSeasons: Record<string, Season[]> = {
           title: 'نام بعدی',
           duration: '۵۰ دقیقه',
           description: 'لیست ناپدیدشدگان طولانی‌تر می‌شود.',
-          thumbnail: '/backdrops/horizon.png',
+          thumbnail: '/backdrops/horizon.webp',
           videoUrl: sampleVideos.tearsOfSteel,
         },
       ],
@@ -650,7 +650,7 @@ export const collections: Collection[] = [
     id: 'scifi-night',
     title: 'شب علمی‌تخیلی',
     subtitle: 'سفری به کهکشان‌های دوردست',
-    cover: '/backdrops/echoes.png',
+    cover: '/backdrops/echoes.webp',
     count: 18,
     accent: 'oklch(0.7 0.15 250)',
   },
@@ -658,7 +658,7 @@ export const collections: Collection[] = [
     id: 'neon-noir',
     title: 'نئون و نوآر',
     subtitle: 'جنایت در زیر نور شهر',
-    cover: '/backdrops/neon.png',
+    cover: '/backdrops/neon.webp',
     count: 12,
     accent: 'oklch(0.7 0.18 320)',
   },
@@ -666,7 +666,7 @@ export const collections: Collection[] = [
     id: 'epic-drama',
     title: 'درام‌های حماسی',
     subtitle: 'داستان‌هایی که ماندگارند',
-    cover: '/backdrops/horizon.png',
+    cover: '/backdrops/horizon.webp',
     count: 24,
     accent: 'oklch(0.75 0.12 60)',
   },
@@ -688,21 +688,21 @@ export const genres = [
 ]
 
 export const genreTiles = [
-  { id: 'scifi', label: 'علمی‌تخیلی', poster: '/posters/echoes.png', accent: 'oklch(0.7 0.16 255)' },
-  { id: 'noir', label: 'نئون و نوآر', poster: '/posters/neon.png', accent: 'oklch(0.65 0.19 320)' },
-  { id: 'drama', label: 'درام', poster: '/posters/horizon.png', accent: 'oklch(0.7 0.12 75)' },
-  { id: 'action', label: 'اکشن', poster: '/posters/ironclad.png', accent: 'oklch(0.62 0.2 28)' },
-  { id: 'romance', label: 'عاشقانه', poster: '/posters/lanterns.png', accent: 'oklch(0.7 0.15 15)' },
-  { id: 'western', label: 'وسترن', poster: '/posters/crimson.png', accent: 'oklch(0.6 0.15 40)' },
+  { id: 'scifi', label: 'علمی‌تخیلی', poster: '/posters/echoes.webp', accent: 'oklch(0.7 0.16 255)' },
+  { id: 'noir', label: 'نئون و نوآر', poster: '/posters/neon.webp', accent: 'oklch(0.65 0.19 320)' },
+  { id: 'drama', label: 'درام', poster: '/posters/horizon.webp', accent: 'oklch(0.7 0.12 75)' },
+  { id: 'action', label: 'اکشن', poster: '/posters/ironclad.webp', accent: 'oklch(0.62 0.2 28)' },
+  { id: 'romance', label: 'عاشقانه', poster: '/posters/lanterns.webp', accent: 'oklch(0.7 0.15 15)' },
+  { id: 'western', label: 'وسترن', poster: '/posters/crimson.webp', accent: 'oklch(0.6 0.15 40)' },
 ]
 
 export const studios: Studio[] = [
-  { id: 's1', name: 'استودیو آرتمیس', logo: '/posters/echoes.png', titles: 48, accent: 'oklch(0.7 0.16 255)' },
-  { id: 's2', name: 'نئون لاین', logo: '/posters/neon.png', titles: 32, accent: 'oklch(0.65 0.19 320)' },
-  { id: 's3', name: 'هورایزن پیکچرز', logo: '/posters/horizon.png', titles: 27, accent: 'oklch(0.7 0.12 75)' },
-  { id: 's4', name: 'کریمسون ورکس', logo: '/posters/crimson.png', titles: 19, accent: 'oklch(0.6 0.15 40)' },
-  { id: 's5', name: 'لانترن فیلمز', logo: '/posters/lanterns.png', titles: 22, accent: 'oklch(0.7 0.15 15)' },
-  { id: 's6', name: 'آیرون‌کَست', logo: '/posters/ironclad.png', titles: 16, accent: 'oklch(0.62 0.2 28)' },
+  { id: 's1', name: 'استودیو آرتمیس', logo: '/posters/echoes.webp', titles: 48, accent: 'oklch(0.7 0.16 255)' },
+  { id: 's2', name: 'نئون لاین', logo: '/posters/neon.webp', titles: 32, accent: 'oklch(0.65 0.19 320)' },
+  { id: 's3', name: 'هورایزن پیکچرز', logo: '/posters/horizon.webp', titles: 27, accent: 'oklch(0.7 0.12 75)' },
+  { id: 's4', name: 'کریمسون ورکس', logo: '/posters/crimson.webp', titles: 19, accent: 'oklch(0.6 0.15 40)' },
+  { id: 's5', name: 'لانترن فیلمز', logo: '/posters/lanterns.webp', titles: 22, accent: 'oklch(0.7 0.15 15)' },
+  { id: 's6', name: 'آیرون‌کَست', logo: '/posters/ironclad.webp', titles: 16, accent: 'oklch(0.62 0.2 28)' },
 ]
 
 export const editorPicks: EditorPick[] = [
@@ -985,7 +985,7 @@ export function getReviews(titleId?: string): Review[] {
         {
           id: `${titleId}-r1`,
           author: 'کاربر نکس‌فیلم',
-          avatar: '/avatars/user.png',
+          avatar: '/avatars/user.webp',
           rating: Math.round(movie.rating),
           date: 'اخیراً',
           content: `تجربه‌ای قوی از «${movie.title}» — پیشنهاد می‌شود.`,

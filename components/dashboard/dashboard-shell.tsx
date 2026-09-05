@@ -104,7 +104,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   const router = useRouter()
   const [name, setName] = useState('کاربر')
-  const [avatar, setAvatar] = useState('/avatars/user.png')
+  const [avatar, setAvatar] = useState('/avatars/user.webp')
   const [email, setEmail] = useState<string | null>(null)
   const [premium, setPremium] = useState(false)
 

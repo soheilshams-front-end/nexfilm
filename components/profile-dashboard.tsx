@@ -35,7 +35,7 @@ export function ProfileDashboard() {
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
           <div className="relative">
             <img
-              src="/avatars/user.png"
+              src="/avatars/user.webp"
               alt="آواتار شما"
               className="size-24 rounded-2xl border-2 border-border/60 object-cover shadow-xl sm:size-28"
             />

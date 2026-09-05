@@ -11,7 +11,7 @@ export function BrandMark({
 }) {
   return (
     <Image
-      src="/brand/logo.png"
+      src="/brand/logo.webp"
       alt=""
       width={size}
       height={size}

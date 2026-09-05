@@ -75,7 +75,7 @@ function rev(id: string, author: string, rating: number, content: string): Revie
   return {
     id,
     author,
-    avatar: '/avatars/user.png',
+    avatar: '/avatars/user.webp',
     rating,
     date: 'اخیراً',
     content,
@@ -747,7 +747,7 @@ export function youtubeWatchUrl(id: string): string | undefined {
 export function youtubeThumbnailUrl(id: string): string | undefined {
   const yt = youtubeTrailerId(id)
   if (!yt) return undefined
-  return `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`
+  return `https://i.ytimg.com/vi/${yt}/hqdefault.webp`
 }
 
 export function screenshotsForTitle(id: string, poster: string, backdrop: string): Screenshot[] {

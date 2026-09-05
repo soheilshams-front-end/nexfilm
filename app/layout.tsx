@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description:
     'نکس فیلم، پلتفرم پخش آنلاین فیلم و سریال با کیفیت سینمایی. جدیدترین و محبوب‌ترین آثار جهان را کشف کنید و تماشا کنید.',
   icons: {
-    icon: [{ url: '/brand/logo.png', type: 'image/png' }],
-    apple: [{ url: '/brand/logo-512.png', type: 'image/png' }],
+    icon: [{ url: '/brand/logo.webp', type: 'image/webp' }],
+    apple: [{ url: '/brand/logo-512.webp', type: 'image/webp' }],
   },
 }
 

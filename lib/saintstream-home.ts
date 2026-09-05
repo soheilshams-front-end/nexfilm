@@ -29,8 +29,8 @@ export type SaintstreamHome = {
   liveList: SaintstreamTitle[]
 }
 
-const p = (name: string) => `/saintstream/posters/${name}.jpg`
-const h = (name: string) => `/saintstream/hero/${name}.jpg`
+const p = (name: string) => `/saintstream/posters/${name}.webp`
+const h = (name: string) => `/saintstream/hero/${name}.webp`
 
 /** Catalog mirrors Saintstream Figma Home — HQ posters/backdrops from web */
 const titles: Record<string, SaintstreamTitle> = {

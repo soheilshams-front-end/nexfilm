@@ -36,7 +36,7 @@ export default function ProfilePage() {
 
 function ProfileDashboard() {
   const [name, setName] = useState('کاربر')
-  const [avatar, setAvatar] = useState('/avatars/user.png')
+  const [avatar, setAvatar] = useState('/avatars/user.webp')
   const [email, setEmail] = useState<string | null>(null)
   const [premium, setPremium] = useState(false)
   const [continueMovies, setContinueMovies] = useState<Movie[]>([])

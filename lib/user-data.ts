@@ -66,7 +66,7 @@ export const userData = {
   name: 'آرشا مهرآیین',
   email: 'arasha@nextfilm.tv',
   phone: '+۹۸ ۹۱۲ ••• ••۷۸',
-  avatar: '/avatars/user.png',
+  avatar: '/avatars/user.webp',
   plan: 'Premium',
   joinDate: 'فروردین ۱۴۰۲',
   location: 'تهران، ایران',
@@ -113,10 +113,10 @@ export const notifications: NotificationItem[] = [
 ]
 
 export const downloads: DownloadItem[] = [
-  { movieId: 'echoes-of-tomorrow', title: 'Echoes of Tomorrow', poster: '/posters/echoes.png', size: '۵.۴ GB', quality: '۴K', progress: 100, status: 'completed', expires: '۱۸ روز' },
-  { movieId: 'neon-requiem', title: 'Neon Requiem', poster: '/posters/neon.png', size: '4.1 GB', quality: '۱۰۸۰p', progress: 100, status: 'completed', expires: '۹ روز' },
-  { movieId: 'afterlight', title: 'Afterlight', poster: '/posters/afterlight.png', size: '6.2 GB', quality: '۴K', progress: 67, status: 'downloading', expires: '—' },
-  { movieId: 'silent-horizon', title: 'The Silent Horizon', poster: '/posters/horizon.png', size: '3.8 GB', quality: '۱۰۸۰p', progress: 0, status: 'queued', expires: '—' },
+  { movieId: 'echoes-of-tomorrow', title: 'Echoes of Tomorrow', poster: '/posters/echoes.webp', size: '۵.۴ GB', quality: '۴K', progress: 100, status: 'completed', expires: '۱۸ روز' },
+  { movieId: 'neon-requiem', title: 'Neon Requiem', poster: '/posters/neon.webp', size: '4.1 GB', quality: '۱۰۸۰p', progress: 100, status: 'completed', expires: '۹ روز' },
+  { movieId: 'afterlight', title: 'Afterlight', poster: '/posters/afterlight.webp', size: '6.2 GB', quality: '۴K', progress: 67, status: 'downloading', expires: '—' },
+  { movieId: 'silent-horizon', title: 'The Silent Horizon', poster: '/posters/horizon.webp', size: '3.8 GB', quality: '۱۰۸۰p', progress: 0, status: 'queued', expires: '—' },
 ]
 
 export const plans: Plan[] = [

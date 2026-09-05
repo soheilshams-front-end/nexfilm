@@ -16,14 +16,14 @@ import { Button } from '@/components/untitled/button'
 import { cn } from '@/lib/utils'
 
 const HERO_STILLS = [
-  '/saintstream/posters/interstellar.jpg',
-  '/saintstream/posters/the-dark-knight.jpg',
-  '/saintstream/posters/dune-part-two.jpg',
-  '/saintstream/posters/oppenheimer.jpg',
-  '/saintstream/posters/the-matrix.jpg',
-  '/saintstream/posters/lotr-fellowship.jpg',
-  '/saintstream/posters/parasite.jpg',
-  '/saintstream/posters/the-godfather.jpg',
+  '/saintstream/posters/interstellar.webp',
+  '/saintstream/posters/the-dark-knight.webp',
+  '/saintstream/posters/dune-part-two.webp',
+  '/saintstream/posters/oppenheimer.webp',
+  '/saintstream/posters/the-matrix.webp',
+  '/saintstream/posters/lotr-fellowship.webp',
+  '/saintstream/posters/parasite.webp',
+  '/saintstream/posters/the-godfather.webp',
 ]
 
 function formatRenewDate(iso: string | null): string {
