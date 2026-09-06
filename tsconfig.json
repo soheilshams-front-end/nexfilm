@@ -37,6 +37,7 @@
   ],
   "exclude": [
     "node_modules",
-    "saint-stream-temp"
+    "saint-stream-temp",
+    "components/animate-ui"
   ]
 }

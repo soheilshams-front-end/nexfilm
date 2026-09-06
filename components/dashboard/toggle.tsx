@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Switch, SwitchThumb } from '@/components/animate-ui/primitives/headless/switch'
 import { cn } from '@/lib/utils'
 
 export function Toggle({
@@ -14,24 +13,26 @@ export function Toggle({
   const [on, setOn] = useState(defaultOn)
 
   return (
-    <Switch
-      checked={on}
-      onChange={(value) => {
-        setOn(value)
-        onChange?.(value)
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      onClick={() => {
+        const next = !on
+        setOn(next)
+        onChange?.(next)
       }}
       className={cn(
         'relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full border border-white/10 transition-colors',
         on ? 'bg-primary' : 'bg-[var(--bg-3)]',
       )}
     >
-      <SwitchThumb
+      <span
         className={cn(
-          'pointer-events-none absolute size-5 rounded-full bg-white shadow-md',
+          'pointer-events-none absolute size-5 rounded-full bg-white shadow-md transition-[inset-inline-start]',
           on ? 'start-1' : 'start-6',
         )}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
-    </Switch>
+    </button>
   )
 }

@@ -1,8 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
-import { fa } from '@/lib/format-fa'
+import { fa, displayRating } from '@/lib/format-fa'
 import type { Movie } from '@/lib/movies'
 import type { SaintstreamTitle } from '@/lib/saintstream-home'
 import { cn } from '@/lib/utils'
@@ -37,9 +38,7 @@ export function PosterCard({
   title: PosterCardTitle | SaintstreamTitle
   className?: string
   widthClass?: string
-  /** 0–100 continue-watching progress */
   progress?: number
-  /** Override detail link (e.g. /watch/id) */
   href?: string
 }) {
   const displayTitle =
@@ -55,14 +54,12 @@ export function PosterCard({
       className={cn('focus-tile group block shrink-0 snap-start outline-none', widthClass, className)}
     >
       <div className="relative aspect-[2/3] focus-tile-media overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.08]">
-        <img
-          src={title.poster}
+        <Image
+          src={title.poster || '/placeholder.svg'}
           alt={displayTitle}
-          className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.src = '/placeholder.svg'
-          }}
+          fill
+          sizes="(max-width: 640px) 40vw, 168px"
+          className="object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
         />
 
         <div
@@ -81,17 +78,11 @@ export function PosterCard({
           >
             {displayTitle}
           </h3>
-          <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] tracking-wide text-white/70 sm:mt-1.5 sm:gap-1.5 sm:text-[11px] md:text-[12px]">
+          <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] text-white/70 sm:mt-1.5 sm:gap-1.5 sm:text-[11px] md:text-[12px]">
             <Star className="size-2.5 shrink-0 fill-[var(--star)] text-[var(--star)] sm:size-3" />
-            <span className="text-white/90">{fa(title.rating.toFixed(1))}</span>
-            <span aria-hidden className="hidden text-white/35 sm:inline">
-              ·
-            </span>
-            <span className="hidden truncate sm:inline">{title.genres[0] ?? typeLabel}</span>
-            <span aria-hidden className="hidden text-white/35 sm:inline">
-              ·
-            </span>
-            <span className="hidden shrink-0 sm:inline">{typeLabel}</span>
+            <span className="text-white/90">{fa(displayRating(title.rating).toFixed(1))}</span>
+            <span aria-hidden className="text-white/35">·</span>
+            <span className="truncate">{title.genres[0] ?? typeLabel}</span>
           </p>
           {typeof progress === 'number' && progress > 0 ? (
             <div className="mt-1.5 h-0.5 overflow-hidden rounded-full bg-white/20 sm:mt-2.5 sm:h-1">

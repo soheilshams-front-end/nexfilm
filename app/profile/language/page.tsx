@@ -1,74 +1,93 @@
 'use client'
 
-import { useState } from 'react'
-import { Globe, Check } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Check, Globe } from 'lucide-react'
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
-import { Toggle } from '@/components/dashboard/toggle'
 import { SectionCard } from '@/components/dashboard/ui-bits'
 import { cn } from '@/lib/utils'
+import { loadPlayerPrefs, savePlayerPrefs } from '@/lib/player-prefs'
+import { playerSettings } from '@/lib/movies'
+import { useToast } from '@/components/toast-provider'
 
 const languages = [
-  { id: 'fa', label: 'فارسی', native: 'Persian', flag: '🇮🇷', dir: 'rtl' },
-  { id: 'en', label: 'انگلیسی', native: 'English', flag: '🇬🇧', dir: 'ltr' },
-  { id: 'ar', label: 'عربی', native: 'العربية', flag: '🇸🇦', dir: 'rtl' },
-  { id: 'tr', label: 'ترکی', native: 'Türkçe', flag: '🇹🇷', dir: 'ltr' },
-  { id: 'fr', label: 'فرانسوی', native: 'Français', flag: '🇫🇷', dir: 'ltr' },
-  { id: 'de', label: 'آلمانی', native: 'Deutsch', flag: '🇩🇪', dir: 'ltr' },
+  { id: 'fa', label: 'فارسی', native: 'Persian', available: true },
+  { id: 'en', label: 'انگلیسی', native: 'English', available: false },
+  { id: 'ar', label: 'عربی', native: 'العربية', available: false },
 ]
 
-const subtitleLangs = ['فارسی', 'انگلیسی', 'عربی', 'اسپانیایی', 'فرانسوی', 'آلمانی', 'ژاپنی']
-
 export default function LanguagePage() {
-  const [lang, setLang] = useState('fa')
+  const toast = useToast()
   const [subs, setSubs] = useState('فارسی')
 
-  return (
-    <main className="min-h-screen">      <SiteNav />
-      <DashboardShell>
-        <PageHeader title="زبان" subtitle="زبان رابط کاربری و زیرنویس" />
+  useEffect(() => {
+    setSubs(loadPlayerPrefs().subtitle)
+  }, [])
 
-        {/* App language */}
+  return (
+    <main className="min-h-screen">
+      <SiteNav />
+      <DashboardShell>
+        <PageHeader title="زبان" subtitle="زبان رابط و زیرنویس پیش‌فرض" />
+
         <SectionCard title="زبان برنامه">
-          <p className="mb-4 text-sm text-muted-foreground">زبان نمایش منوها و متن‌ها</p>
+          <p className="mb-4 text-sm text-muted-foreground">فعلاً فقط فارسی فعال است</p>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {languages.map((l) => (
               <button
                 key={l.id}
-                onClick={() => setLang(l.id)}
+                type="button"
+                disabled={!l.available}
+                onClick={() => {
+                  if (!l.available) toast('این زبان به‌زودی')
+                }}
                 className={cn(
-                  'reveal group flex items-center gap-3 rounded-2xl border p-4 text-right transition-all duration-300',
-                  lang === l.id ? 'border-primary bg-primary/5' : 'border-border/60 bg-card/50 hover:border-primary/30',
+                  'flex items-center gap-3 rounded-2xl border p-4 text-right transition-all',
+                  l.id === 'fa'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border/60 bg-card/40 opacity-60',
                 )}
               >
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-surface text-2xl">{l.flag}</span>
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-surface">
+                  <Globe className="size-5 text-primary" />
+                </span>
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold">{l.label}</p>
-                  <p className="text-xs text-muted-foreground" dir={l.dir}>{l.native} • {l.dir === 'rtl' ? 'راست‌چین' : 'چپ‌چین'}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {l.native}
+                    {!l.available ? ' · به‌زودی' : ''}
+                  </p>
                 </div>
-                {lang === l.id && (
-                  <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
+                {l.id === 'fa' ? (
+                  <span className="grid size-6 place-items-center rounded-full bg-primary text-primary-foreground">
                     <Check className="size-3.5" />
                   </span>
-                )}
+                ) : null}
               </button>
             ))}
           </div>
         </SectionCard>
 
-        {/* Subtitle language */}
         <div className="mt-6">
           <SectionCard title="زبان پیش‌فرض زیرنویس">
-            <p className="mb-4 text-sm text-muted-foreground">زیرنویسی که هنگام پخش به‌صورت خودکار انتخاب می‌شود</p>
+            <p className="mb-4 text-sm text-muted-foreground">در prefs پلیر ذخیره می‌شود</p>
             <div className="flex flex-wrap gap-2">
-              {subtitleLangs.map((s) => (
+              {playerSettings.subtitles.map((s) => (
                 <button
                   key={s}
-                  onClick={() => setSubs(s)}
+                  type="button"
+                  onClick={() => {
+                    const prefs = loadPlayerPrefs()
+                    savePlayerPrefs({ ...prefs, subtitle: s })
+                    setSubs(s)
+                    toast('زیرنویس پیش‌فرض ذخیره شد')
+                  }}
                   className={cn(
-                    'rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300',
-                    subs === s ? 'border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_-6px_var(--primary)]' : 'border-border bg-card/50 text-muted-foreground hover:border-primary/40 hover:text-foreground',
+                    'rounded-full border px-4 py-2 text-sm font-medium transition-all',
+                    subs === s
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-border bg-card/50 text-muted-foreground hover:border-primary/40',
                   )}
                 >
                   {s}
@@ -76,30 +95,6 @@ export default function LanguagePage() {
               ))}
             </div>
           </SectionCard>
-        </div>
-
-        {/* Audio prefs */}
-        <div className="mt-6 space-y-3">
-          <div className="reveal flex items-center gap-4 rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm">
-            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
-              <Globe className="size-5" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="font-semibold">دوباله فارسی پیش‌فرض</p>
-              <p className="text-xs text-muted-foreground">استفاده از دوبله فارسی وقتی در دسترس است</p>
-            </div>
-            <Toggle defaultOn />
-          </div>
-          <div className="reveal flex items-center gap-4 rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm">
-            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
-              <Globe className="size-5" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="font-semibold">نمایش محتوای بومی</p>
-              <p className="text-xs text-muted-foreground">اولویت دادن به فیلم‌های ایرانی</p>
-            </div>
-            <Toggle defaultOn={false} />
-          </div>
         </div>
       </DashboardShell>
       <SiteFooter />

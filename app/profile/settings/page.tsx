@@ -2,31 +2,47 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Play, Monitor, Volume2, LogOut } from 'lucide-react'
+import { Play, Monitor, LogOut } from 'lucide-react'
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
 import { Toggle } from '@/components/dashboard/toggle'
 import { SectionCard } from '@/components/dashboard/ui-bits'
 import { Button } from '@/components/untitled/button'
-import {
-  getAccountEmail,
-  getActiveProfile,
-  logout,
-} from '@/lib/user-store'
+import { getAccountEmail, getActiveProfile, logout } from '@/lib/user-store'
 import { useToast } from '@/components/toast-provider'
+import {
+  defaultPlayerPrefs,
+  loadPlayerPrefs,
+  savePlayerPrefs,
+  type PlayerPrefs,
+} from '@/lib/player-prefs'
+import Link from 'next/link'
 
 export default function SettingsPage() {
   const router = useRouter()
   const toast = useToast()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [prefs, setPrefs] = useState<PlayerPrefs>(defaultPlayerPrefs)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const profile = getActiveProfile()
     setName(profile?.name ?? '')
     setEmail(getAccountEmail() ?? '')
+    setPrefs(loadPlayerPrefs())
+    setReady(true)
   }, [])
+
+  const patchPrefs = (partial: Partial<PlayerPrefs>) => {
+    setPrefs((prev) => {
+      const next = { ...prev, ...partial }
+      savePlayerPrefs(next)
+      return next
+    })
+    toast('ترجیحات پخش ذخیره شد')
+  }
 
   return (
     <main className="min-h-screen">
@@ -40,9 +56,7 @@ export default function SettingsPage() {
             <FieldRow label="ایمیل" value={email || '—'} />
           </div>
           <div className="p-3">
-            <Button
-              onPress={() => toast('تغییرات به‌صورت آزمایشی ذخیره شد')}
-            >
+            <Button onPress={() => toast('نام از صفحهٔ پروفایل‌ها قابل ویرایش است')}>
               ذخیره تغییرات
             </Button>
           </div>
@@ -53,30 +67,26 @@ export default function SettingsPage() {
             <div className="space-y-1">
               <SettingRow
                 icon={Play}
-                title="پخش خودکار"
-                desc="شروع خودکار تریلر هنگام مرور"
+                title="پخش خودکار تریلر"
+                desc="شروع خودکار تریلر هنگام مرور (ذخیره لوکال)"
                 toggle
-                defaultOn
+                defaultOn={ready ? prefs.autoplayTrailers : true}
+                onToggle={(on) => patchPrefs({ autoplayTrailers: on })}
               />
               <SettingRow
                 icon={Monitor}
                 title="کیفیت پیش‌فرض"
-                desc="۷۲۰p رایگان · ۱۰۸۰/۴K با اشتراک"
+                desc={`${prefs.quality} — از تنظیمات پلیر هم قابل تغییر است`}
                 chevron
-              />
-              <SettingRow
-                icon={Volume2}
-                title="صدای همیشه روشن"
-                desc="پخش صدا هنگام اسکرول"
-                toggle
-                defaultOn={false}
+                href="/subscription"
               />
               <SettingRow
                 icon={Play}
                 title="رد کردن خودکار تیتراژ"
-                desc="رد تیتراژ شروع به‌صورت خودکار"
+                desc="ترجیح ذخیره می‌شود؛ مارکر تیتراژ هنوز آزمایشی است"
                 toggle
-                defaultOn
+                defaultOn={ready ? prefs.skipIntro : true}
+                onToggle={(on) => patchPrefs({ skipIntro: on })}
               />
             </div>
           </SectionCard>
@@ -122,6 +132,8 @@ function SettingRow({
   toggle,
   chevron,
   defaultOn,
+  onToggle,
+  href,
 }: {
   icon: React.ComponentType<{ className?: string }>
   title: string
@@ -129,8 +141,10 @@ function SettingRow({
   toggle?: boolean
   chevron?: boolean
   defaultOn?: boolean
+  onToggle?: (on: boolean) => void
+  href?: string
 }) {
-  return (
+  const body = (
     <div className="settings-row">
       <span className="grid size-8 shrink-0 place-items-center rounded-[8px] bg-[var(--brand)] text-white">
         <Icon className="size-4" />
@@ -139,9 +153,16 @@ function SettingRow({
         <p className="text-[15px] font-semibold text-white">{title}</p>
         <p className="text-footnote">{desc}</p>
       </div>
-      {toggle && <Toggle defaultOn={defaultOn} />}
+      {toggle && <Toggle key={String(defaultOn)} defaultOn={defaultOn} onChange={onToggle} />}
       {chevron && <span className="text-[var(--label-3)]">‹</span>}
     </div>
+  )
+  return href ? (
+    <Link href={href} className="block">
+      {body}
+    </Link>
+  ) : (
+    body
   )
 }
 

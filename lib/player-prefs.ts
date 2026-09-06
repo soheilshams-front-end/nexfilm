@@ -7,6 +7,8 @@ export type PlayerPrefs = {
   audio: string
   speed: string
   caption: SubtitlePrefs
+  autoplayTrailers: boolean
+  skipIntro: boolean
 }
 
 const KEY = 'nextfilm-player-prefs'
@@ -24,6 +26,8 @@ export const defaultPlayerPrefs: PlayerPrefs = {
   audio: 'فارسی (دوبله)',
   speed: '۱×',
   caption: defaultCaptionPrefs,
+  autoplayTrailers: true,
+  skipIntro: true,
 }
 
 function isString(v: unknown): v is string {
@@ -60,6 +64,12 @@ export function loadPlayerPrefs(): PlayerPrefs {
         opacity: typeof cap.opacity === 'number' ? Math.max(0, Math.min(100, cap.opacity)) : 35,
         position: cap.position === 'middle' ? 'middle' : 'bottom',
       },
+      autoplayTrailers:
+        typeof parsed.autoplayTrailers === 'boolean'
+          ? parsed.autoplayTrailers
+          : defaultPlayerPrefs.autoplayTrailers,
+      skipIntro:
+        typeof parsed.skipIntro === 'boolean' ? parsed.skipIntro : defaultPlayerPrefs.skipIntro,
     }
   } catch {
     return defaultPlayerPrefs

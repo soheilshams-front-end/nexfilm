@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Play, Plus, Star } from 'lucide-react'
 import type { SaintstreamTitle } from '@/lib/saintstream-home'
-import { fa } from '@/lib/format-fa'
+import { fa, displayRating } from '@/lib/format-fa'
 import { Badge } from '@/components/untitled/badge'
 import { Button } from '@/components/untitled/button'
 
@@ -30,7 +30,7 @@ function SideList({ title, items }: { title: string; items: SaintstreamTitle[] }
                   </p>
                   <p className="mt-1 inline-flex items-center gap-1 text-[12px] text-[var(--meta-muted)]">
                     <Star className="size-3 fill-[var(--star)] text-[var(--star)]" />
-                    {fa(item.rating.toFixed(1))}
+                    {fa(displayRating(item.rating).toFixed(1))}
                     <span aria-hidden>·</span>
                     {item.genres[0]}
                   </p>
@@ -73,7 +73,7 @@ export function HomeBottomGrid({
             <p className="mt-2 flex flex-wrap items-center gap-2 text-[13px] text-[var(--meta-muted)]">
               <span className="inline-flex items-center gap-1 text-white">
                 <Star className="size-3.5 fill-[var(--star)] text-[var(--star)]" />
-                {fa(award.rating.toFixed(1))}
+                {fa(displayRating(award.rating).toFixed(1))}
               </span>
               <span aria-hidden>·</span>
               <span>{award.duration}</span>

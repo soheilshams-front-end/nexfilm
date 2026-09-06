@@ -7,6 +7,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
 import { Toggle } from '@/components/dashboard/toggle'
 import { SectionCard } from '@/components/dashboard/ui-bits'
+import { DemoModeBanner } from '@/components/demo-mode-banner'
 import { notifications, notificationPrefs } from '@/lib/user-data'
 import { fa } from '@/lib/format-fa'
 import { cn } from '@/lib/utils'
@@ -31,6 +32,7 @@ export default function NotificationsPage() {
             </button>
           }
         />
+        <DemoModeBanner detail="اعلان‌ها نمونهٔ ثابت‌اند و همگام‌سازی سرور ندارند." />
 
         <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
           {/* Notification list */}

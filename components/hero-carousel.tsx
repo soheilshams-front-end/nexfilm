@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
-import { Play, Plus, Check, Star, Volume2, VolumeX } from 'lucide-react'
+import { Play, Plus, Check, Star } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { SaintstreamTitle } from '@/lib/saintstream-home'
-import { fa } from '@/lib/format-fa'
+import { fa, displayRating } from '@/lib/format-fa'
 import { isInMyList, toggleMyList } from '@/lib/user-store'
 import { useToast } from '@/components/toast-provider'
 import { Button } from '@/components/untitled/button'
@@ -26,7 +26,6 @@ export function HeroCarousel({
   const [internalIndex, setInternalIndex] = useState(0)
   const index = controlledIndex ?? internalIndex
   const [paused, setPaused] = useState(false)
-  const [muted, setMuted] = useState(true)
   const [inList, setInList] = useState(false)
   const toast = useToast()
   const reduceMotion = useReducedMotion()
@@ -61,7 +60,7 @@ export function HeroCarousel({
 
   return (
     <section
-      className="relative h-[min(100dvh,780px)] min-h-[520px] max-h-[1100px] w-full overflow-hidden bg-transparent md:h-[100dvh] md:min-h-[560px]"
+      className="relative h-[min(78dvh,640px)] min-h-[420px] max-h-[1100px] w-full overflow-hidden bg-transparent sm:h-[min(88dvh,720px)] sm:min-h-[480px] md:h-[100dvh] md:min-h-[560px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -83,7 +82,7 @@ export function HeroCarousel({
         </motion.div>
       </AnimatePresence>
 
-      <div className="page-max page-pad relative z-10 flex h-full flex-col justify-end pb-[calc(var(--tabbar-h)+2.5rem)] pt-28 sm:pt-36 md:pb-28 md:pt-40">
+      <div className="page-max page-pad relative z-10 flex h-full flex-col justify-end pb-[calc(var(--tabbar-h)+2.25rem)] pt-20 sm:pt-36 md:pb-28 md:pt-40">
         <AnimatePresence mode="wait">
           <motion.div
             key={movie.id}
@@ -111,7 +110,7 @@ export function HeroCarousel({
             <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2 text-[12px] text-[var(--fg-tertiary)] sm:mt-4 sm:text-[13px] md:text-sm">
               <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 text-white backdrop-blur-sm">
                 <Star className="size-3.5 fill-[var(--star)] text-[var(--star)]" />
-                {fa(movie.rating.toFixed(1))}
+                {fa(displayRating(movie.rating).toFixed(1))}
               </span>
               <span>{movie.duration}</span>
               <span aria-hidden>·</span>
@@ -129,30 +128,31 @@ export function HeroCarousel({
               </p>
             ) : null}
 
-            <div className="mt-5 flex flex-wrap items-center gap-2.5 sm:mt-7 sm:gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-7 sm:gap-3">
               <Button
                 asChild
-                size="lg"
-                className="rounded-xl px-5 shadow-[0_10px_30px_rgba(29,214,111,0.35)] sm:px-6"
+                size="md"
+                className="rounded-xl px-4 shadow-[0_10px_30px_rgba(29,214,111,0.35)] sm:h-11 sm:px-6 sm:text-base"
               >
                 <Link href={watchHref}>
-                  <Play className="size-4 fill-current" />
-                  تماشای تریلر
+                  <Play className="size-3.5 fill-current sm:size-4" />
+                  تماشا
                 </Link>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
-                size="lg"
-                className="rounded-xl border-0 bg-white/10 px-4 text-white ring-1 ring-white/15 backdrop-blur-md hover:bg-white/16 sm:px-5"
+                size="md"
+                className="rounded-xl border-0 bg-white/10 px-3 text-[13px] text-white ring-1 ring-white/15 backdrop-blur-md hover:bg-white/16 sm:h-11 sm:px-5 sm:text-base"
                 onClick={() => {
                   const added = toggleMyList(movie.id)
                   setInList(added)
                   toast(added ? 'به لیست تماشا اضافه شد' : 'از لیست تماشا حذف شد')
                 }}
               >
-                {inList ? <Check className="size-4" /> : <Plus className="size-4" />}
-                {inList ? 'در لیست' : 'افزودن به لیست'}
+                {inList ? <Check className="size-3.5 sm:size-4" /> : <Plus className="size-3.5 sm:size-4" />}
+                <span className="sm:hidden">{inList ? 'در لیست' : 'لیست'}</span>
+                <span className="hidden sm:inline">{inList ? 'در لیست' : 'افزودن به لیست'}</span>
               </Button>
             </div>
           </motion.div>
@@ -177,17 +177,6 @@ export function HeroCarousel({
             ))}
           </div>
         ) : null}
-
-        <Button
-          type="button"
-          variant="secondary"
-          size="icon-sm"
-          className="rounded-full bg-black/45"
-          onClick={() => setMuted((m) => !m)}
-          aria-label={muted ? 'فعال‌سازی صدا' : 'قطع صدا'}
-        >
-          {muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
-        </Button>
       </div>
     </section>
   )

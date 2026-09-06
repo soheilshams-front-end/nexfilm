@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Movie } from '@/lib/movies'
 import { fa } from '@/lib/format-fa'
 import { getCatalogGenres } from '@/lib/movies'
@@ -11,6 +11,9 @@ import {
   type ArchiveFilterState,
 } from '@/components/archive-filter-bar'
 import { cn } from '@/lib/utils'
+import { isKidsProfileActive } from '@/lib/user-store'
+import { isKidsSafeMaturity } from '@/lib/title-credits'
+import { genresMatch, canonicalizeGenre } from '@/lib/genre-canonical'
 
 export function CatalogBrowser({
   items,
@@ -29,17 +32,23 @@ export function CatalogBrowser({
   compactTop?: boolean
   initialGenre?: string | null
 }) {
+  const [kidsMode, setKidsMode] = useState(false)
+
+  useEffect(() => {
+    setKidsMode(isKidsProfileActive())
+  }, [])
+
   const genres = useMemo(() => {
     const fromItems = new Set<string>()
-    for (const m of items) for (const g of m.genres) fromItems.add(g)
-    return (fromItems.size ? [...fromItems] : getCatalogGenres()).sort((a, b) =>
+    for (const m of items) for (const g of m.genres) fromItems.add(canonicalizeGenre(g))
+    return (fromItems.size ? [...fromItems] : getCatalogGenres().map(canonicalizeGenre)).sort((a, b) =>
       a.localeCompare(b, 'fa'),
     )
   }, [items])
 
   const [filter, setFilter] = useState<ArchiveFilterState>({
     query: '',
-    genre: initialGenre,
+    genre: initialGenre ? canonicalizeGenre(initialGenre) : null,
     sort: 'newest',
     scope: 'all',
     decade: null,
@@ -49,24 +58,9 @@ export function CatalogBrowser({
     let list = [...items]
     if (kindLock === 'Film') list = list.filter((m) => m.type === 'Film')
     if (kindLock === 'Series') list = list.filter((m) => m.type === 'Series')
+    if (kidsMode) list = list.filter((m) => isKidsSafeMaturity(m.maturity))
 
-    // Kids profile: only safe maturity
-    if (typeof window !== 'undefined') {
-      try {
-        const raw = localStorage.getItem('nextfilm-user-state')
-        if (raw) {
-          const s = JSON.parse(raw)
-          const profile = s.profiles?.find((p: { id: string }) => p.id === s.activeProfileId)
-          if (profile?.isKids) {
-            list = list.filter((m) => m.maturity === 'همه' || m.maturity === '+۷')
-          }
-        }
-      } catch {
-        /* ignore */
-      }
-    }
-
-    if (filter.genre) list = list.filter((m) => m.genres.includes(filter.genre!))
+    if (filter.genre) list = list.filter((m) => genresMatch(m.genres, filter.genre!))
     list = list.filter((m) => matchesDecade(m.year, filter.decade))
 
     const q = filter.query.trim().toLowerCase()
@@ -94,7 +88,7 @@ export function CatalogBrowser({
     }
 
     return list
-  }, [items, kindLock, filter])
+  }, [items, kindLock, filter, kidsMode])
 
   const hasActive =
     Boolean(filter.query.trim() || filter.genre || filter.decade) || filter.scope !== 'all'

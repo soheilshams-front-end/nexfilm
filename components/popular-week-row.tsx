@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Star } from 'lucide-react'
 import type { SaintstreamTitle } from '@/lib/saintstream-home'
-import { fa } from '@/lib/format-fa'
+import { fa, displayRating } from '@/lib/format-fa'
 import { ShelfSection, ShelfTrack, useShelfScroller } from '@/components/shelf-section'
 import { cn } from '@/lib/utils'
 
@@ -51,43 +51,43 @@ export function PopularWeekRow({ items }: { items: SaintstreamTitle[] }) {
                   {fa(rank)}
                 </span>
 
-                <div className="focus-tile-media relative z-10 ms-auto w-[68%] overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.1] sm:w-[70%]">
-                  <div className="relative aspect-[2/3] w-full">
-                    <img
-                      src={item.poster}
-                      alt={displayTitle}
-                      className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.src = '/placeholder.svg'
-                      }}
-                    />
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[rgba(var(--bg-rgb),0.92)] via-[rgba(var(--bg-rgb),0.35)] to-transparent"
-                    />
-                    <p className="absolute inset-x-0 bottom-0 z-[1] flex items-center justify-center gap-1 p-1.5 text-[10px] text-white/80 sm:gap-1.5 sm:p-2.5 sm:text-[11px]">
-                      <Star className="size-2.5 shrink-0 fill-[var(--star)] text-[var(--star)] sm:size-3" />
-                      <span className="text-white/95">{fa(item.rating.toFixed(1))}</span>
-                      <span aria-hidden className="text-white/30">
-                        ·
-                      </span>
-                      <span className="truncate">{item.genres[0] ?? typeLabel}</span>
-                    </p>
+                <div className="relative z-10 ms-auto w-[68%] min-w-0 sm:w-[70%]">
+                  <div className="focus-tile-media overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.1]">
+                    <div className="relative aspect-[2/3] w-full">
+                      <img
+                        src={item.poster}
+                        alt={displayTitle}
+                        className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = '/placeholder.svg'
+                        }}
+                      />
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[rgba(var(--bg-rgb),0.92)] via-[rgba(var(--bg-rgb),0.35)] to-transparent"
+                      />
+                      <p className="absolute inset-x-0 bottom-0 z-[1] flex items-center justify-center gap-1 p-1.5 text-[10px] text-white/80 sm:gap-1.5 sm:p-2.5 sm:text-[11px]">
+                        <Star className="size-2.5 shrink-0 fill-[var(--star)] text-[var(--star)] sm:size-3" />
+                        <span className="text-white/95">{fa(displayRating(item.rating).toFixed(1))}</span>
+                        <span aria-hidden className="text-white/30">
+                          ·
+                        </span>
+                        <span className="truncate">{item.genres[0] ?? typeLabel}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-2 px-0.5 text-center sm:mt-2.5">
+                    <h3
+                      className="font-en line-clamp-2 text-[12px] font-semibold leading-snug tracking-wide text-white sm:text-[13px] md:text-[14px]"
+                      dir="ltr"
+                    >
+                      {displayTitle}
+                    </h3>
+                    <p className="mt-0.5 text-[10px] text-white/45 sm:text-[11px]">{typeLabel}</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-2 px-0.5 sm:mt-2.5">
-                <h3
-                  className="font-en line-clamp-2 text-center text-[12px] font-semibold leading-snug tracking-wide text-white sm:text-[13px] md:text-[14px]"
-                  dir="ltr"
-                >
-                  {displayTitle}
-                </h3>
-                <p className="mt-0.5 text-center text-[10px] text-white/45 sm:text-[11px]">
-                  {typeLabel}
-                </p>
               </div>
             </Link>
           )

@@ -45,10 +45,10 @@ export function BrandLockup({
       aria-label="نکس فیلم — خانه"
     >
       <BrandMark
-        size={compactMobile ? 28 : size}
+        size={compactMobile ? 24 : size}
         className={cn(
           'drop-shadow-[0_0_18px_rgba(29,214,111,0.35)]',
-          compactMobile && 'md:h-9 md:w-9',
+          compactMobile && 'md:!h-8 md:!w-8',
         )}
       />
       {showWordmark ? (

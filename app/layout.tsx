@@ -5,12 +5,10 @@ import './globals.css'
 import { SearchProvider } from '@/components/search-provider'
 import { SearchModalLazy } from '@/components/search-modal-lazy'
 import { ToastProvider } from '@/components/toast-provider'
+import { AppearanceBootstrap } from '@/components/appearance-bootstrap'
 
 const peyda = localFont({
   src: [
-    { path: './fonts/Peyda-Thin.ttf', weight: '100', style: 'normal' },
-    { path: './fonts/peyda-extralight.ttf', weight: '200', style: 'normal' },
-    { path: './fonts/peyda-light.ttf', weight: '300', style: 'normal' },
     { path: './fonts/Peyda-Regular.ttf', weight: '400', style: 'normal' },
     { path: './fonts/Peyda-Medium.ttf', weight: '500', style: 'normal' },
     { path: './fonts/Peyda-SemiBold.ttf', weight: '600', style: 'normal' },
@@ -59,6 +57,7 @@ export default function RootLayout({
       <body className={`${peyda.className} font-sans antialiased`}>
         <SearchProvider>
           <ToastProvider>
+            <AppearanceBootstrap />
             {children}
             <SearchModalLazy />
           </ToastProvider>

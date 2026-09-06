@@ -3,6 +3,7 @@ import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
 import { StatCard } from '@/components/dashboard/stat-card'
+import { DemoModeBanner } from '@/components/demo-mode-banner'
 import { devices } from '@/lib/user-data'
 import { fa } from '@/lib/format-fa'
 import { cn } from '@/lib/utils'
@@ -18,13 +19,8 @@ export default function DevicesPage() {
         <PageHeader
           title="دستگاه‌ها"
           subtitle="مدیریت دستگاه‌های متصل به حساب شما"
-          action={
-            <button className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold transition-colors hover:border-destructive/40 hover:text-destructive">
-              <LogOut className="size-4" />
-              خروج از همه
-            </button>
-          }
         />
+        <DemoModeBanner detail="لیست دستگاه‌ها نمونه است؛ خروج از همه غیرفعال است." />
 
         {/* Stats */}
         <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">

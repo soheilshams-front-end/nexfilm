@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { Plus, Check } from 'lucide-react'
 import { isInMyList, toggleMyList } from '@/lib/user-store'
 import { useToast } from '@/components/toast-provider'
 import { LikeButton } from '@/components/like-button'
 import { Button } from '@/components/untitled/button'
 
-export function DetailActions({ movieId, watchHref }: { movieId: string; watchHref: string }) {
+export function DetailActions({ movieId }: { movieId: string; watchHref?: string }) {
   const [inList, setInList] = useState(false)
   const toast = useToast()
 
@@ -17,21 +16,22 @@ export function DetailActions({ movieId, watchHref }: { movieId: string; watchHr
   }, [movieId])
 
   return (
-    <div className="flex flex-wrap items-center gap-2.5">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
       <Button
         type="button"
         variant="secondary"
-        size="lg"
+        size="md"
+        className="h-10 px-3.5 text-[13px] sm:h-11 sm:px-5 sm:text-base"
         onClick={() => {
           const next = toggleMyList(movieId)
           setInList(next)
           toast(next ? 'به لیست من اضافه شد' : 'از لیست من حذف شد')
         }}
       >
-        {inList ? <Check className="size-4" /> : <Plus className="size-4" />}
+        {inList ? <Check className="size-3.5 sm:size-4" /> : <Plus className="size-3.5 sm:size-4" />}
         {inList ? 'در لیست' : 'لیست من'}
       </Button>
-      <LikeButton movieId={movieId} />
+      <LikeButton movieId={movieId} size="sm" className="sm:[&_button]:size-9" />
     </div>
   )
 }

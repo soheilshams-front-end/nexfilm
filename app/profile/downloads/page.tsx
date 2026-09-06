@@ -2,6 +2,7 @@ import { Download, Trash2, HardDrive, Wifi, CheckCircle2, Pause, Clock } from 'l
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
+import { DemoModeBanner } from '@/components/demo-mode-banner'
 import { downloads } from '@/lib/user-data'
 import { fa } from '@/lib/format-fa'
 import { cn } from '@/lib/utils'
@@ -23,6 +24,7 @@ export default function DownloadsPage() {
       <SiteNav />
       <DashboardShell>
         <PageHeader title="دانلودها" subtitle="فیلم‌های دانلودشده برای تماشای آفلاین" />
+        <DemoModeBanner detail="لیست دانلود نمونه است؛ دانلود واقعی آفلاین هنوز فعال نیست." />
 
         <div className="glass mb-6 rounded-[20px] p-5">
           <div className="flex items-center justify-between gap-3 text-sm">

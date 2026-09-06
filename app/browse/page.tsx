@@ -5,6 +5,7 @@ import { BrowseGenres, type GenreCardData } from '@/components/browse-genres'
 import { fa } from '@/lib/format-fa'
 import { getAllTitles, resolveTitle } from '@/lib/movies'
 import { GENRE_SHOWCASE } from '@/lib/genre-showcase'
+import { genresMatch } from '@/lib/genre-canonical'
 import { Button } from '@/components/untitled/button'
 
 function buildGenreCards(): GenreCardData[] {
@@ -14,17 +15,20 @@ function buildGenreCards(): GenreCardData[] {
   for (const row of GENRE_SHOWCASE) {
     const featured = resolveTitle(row.titleId)
     if (!featured) continue
-    const count = Math.max(
-      1,
-      titles.filter((m) => m.genres.includes(row.genre)).length,
-    )
+    const inGenre = titles.filter((m) => genresMatch(m.genres, row.genre))
+    const seriesCount = inGenre.filter((m) => m.type === 'Series').length
+    const filmCount = inGenre.length - seriesCount
+    const hrefBase = seriesCount > filmCount ? '/series' : '/movies'
     cards.push({
       name: row.genre,
-      count,
+      count: Math.max(1, inGenre.length),
       titleFa: featured.title,
       titleEn: featured.titleEn,
       poster: featured.poster,
+      backdrop: featured.backdrop || featured.poster,
       movieId: featured.id,
+      labelEn: row.labelEn,
+      href: `${hrefBase}?genre=${encodeURIComponent(row.genre)}`,
     })
   }
 
@@ -46,7 +50,7 @@ export default function BrowsePage() {
               دسته‌بندی
             </h1>
             <p className="mt-2 max-w-lg text-[13px] leading-6 text-[var(--fg-tertiary)] md:mt-3 md:text-[15px] md:leading-7">
-              هر ژانر به آرشیو فیلم‌های همان دسته لینک می‌شود.
+              هر ژانر به آرشیو فیلم یا سریال همان دسته لینک می‌شود.
             </p>
           </div>
 

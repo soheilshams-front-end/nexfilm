@@ -69,16 +69,16 @@ export default async function WatchPage({
   return (
     <main className="min-h-[100dvh] bg-black text-white">
       <header className="sticky top-0 z-40">
-        <div className="nf-player-glass mx-auto mt-0 flex h-12 max-w-[1800px] items-center gap-2 rounded-none border-b border-white/10 px-2.5 sm:h-14 sm:gap-3 sm:px-5 lg:mx-3 lg:mt-2 lg:rounded-2xl lg:border-b-0">
+        <div className="nf-player-glass mx-auto mt-0 flex h-11 max-w-[1800px] items-center gap-1.5 rounded-none border-b border-white/10 px-2 sm:h-14 sm:gap-3 sm:px-5 lg:mx-3 lg:mt-2 lg:rounded-2xl lg:border-b-0">
           <Link
             href={backHref}
-            className="grid size-9 shrink-0 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            className="grid size-8 shrink-0 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white sm:size-9"
             aria-label="بازگشت"
           >
             <ChevronRight className="size-4 sm:size-5" />
           </Link>
           <div className="min-w-0 flex-1 overflow-hidden">
-            <p className="truncate text-end text-[13px] font-semibold sm:text-sm md:text-[15px]">
+            <p className="truncate text-end text-[12px] font-semibold sm:text-sm md:text-[15px]">
               {episode?.title ? (
                 <>
                   <TitleText forceEn className="inline">

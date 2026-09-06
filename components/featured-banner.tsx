@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Play, Plus, Star } from 'lucide-react'
 import type { SaintstreamTitle } from '@/lib/saintstream-home'
-import { fa } from '@/lib/format-fa'
+import { fa, displayRating } from '@/lib/format-fa'
 import { Button } from '@/components/untitled/button'
 
 export function FeaturedBanner({
@@ -40,7 +40,7 @@ export function FeaturedBanner({
             <div className="mt-3 flex flex-wrap items-center gap-2 text-[13px] text-[var(--meta-muted)]">
               <span className="inline-flex items-center gap-1 text-white">
                 <Star className="size-3.5 fill-[var(--star)] text-[var(--star)]" />
-                {fa(featured.rating.toFixed(1))}
+                {fa(displayRating(featured.rating).toFixed(1))}
               </span>
               <span aria-hidden>·</span>
               <span>{fa(featured.year)}</span>

@@ -66,7 +66,7 @@ export function PlayerSettingsSheet({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
           transition={{ duration: reduce ? 0.12 : 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="nf-player-glass absolute bottom-[5.5rem] left-2 z-30 w-[min(100%-1rem,20.5rem)] overflow-hidden rounded-2xl text-white sm:bottom-32 sm:left-5"
+          className="nf-player-glass absolute bottom-[4.75rem] left-1.5 z-30 max-h-[min(55dvh,22rem)] w-[min(100%-0.75rem,18rem)] overflow-y-auto overflow-x-hidden rounded-2xl text-white sm:bottom-32 sm:left-5 sm:max-h-none sm:w-[min(100%-1rem,20.5rem)]"
           role="dialog"
           aria-label="تنظیمات پخش"
         >

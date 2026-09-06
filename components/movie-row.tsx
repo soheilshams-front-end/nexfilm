@@ -11,7 +11,7 @@ export function MovieRow({
   movies,
   showProgress,
   variant = 'default',
-  href = '#',
+  href,
 }: {
   title: string
   movies: Movie[]
@@ -20,7 +20,6 @@ export function MovieRow({
   href?: string
 }) {
   const scroller = useRef<HTMLDivElement>(null)
-  if (!movies.length) return null
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     const el = scroller.current
@@ -34,6 +33,8 @@ export function MovieRow({
       el.scrollBy({ left: step, behavior: 'smooth' })
     }
   }, [])
+
+  if (!movies.length) return null
 
   return (
     <section className="shelf-section reveal py-4 md:py-9">

@@ -9,6 +9,8 @@ import {
 } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Movie, Actor } from '@/lib/movies'
+import { isKidsProfileActive } from '@/lib/user-store'
+import { isKidsSafeMaturity } from '@/lib/title-credits'
 
 type MovieResult = { kind: 'movie'; movie: Movie }
 type ActorResult = { kind: 'actor'; actor: Actor }
@@ -189,7 +191,9 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
     const t = setTimeout(() => {
       void loadCatalog().then((mod) => {
         const lower = term.toLowerCase()
-        const catalog = mod.getAllTitles()
+        const catalog = mod
+          .getAllTitles()
+          .filter((m) => !isKidsProfileActive() || isKidsSafeMaturity(m.maturity))
         const movieHits: SearchHit[] = catalog
           .filter(
             (m) =>

@@ -784,20 +784,20 @@ export function VideoPlayer({
           animate={{ opacity: chromeOn ? 1 : 0, y: chromeOn ? 0 : -8 }}
           transition={{ duration: reduceMotion ? 0.1 : 0.28 }}
           className={cn(
-            'absolute inset-x-0 top-0 z-20 flex items-center gap-2 p-3 sm:p-4',
+            'absolute inset-x-0 top-0 z-20 flex items-center gap-2 p-2 sm:p-4',
             !chromeOn && 'pointer-events-none',
           )}
         >
-          <div className="nf-player-glass flex w-full items-center gap-2 rounded-2xl px-2 py-1.5">
+          <div className="nf-player-glass flex w-full items-center gap-1.5 rounded-xl px-1.5 py-1 sm:gap-2 sm:rounded-2xl sm:px-2 sm:py-1.5">
             <Link
               href={movie.type === 'Series' ? `/series/${movie.id}` : `/movie/${movie.id}`}
-              className="grid size-10 place-items-center rounded-xl text-white/90 transition-colors hover:bg-white/10"
+              className="grid size-8 place-items-center rounded-lg text-white/90 transition-colors hover:bg-white/10 sm:size-10 sm:rounded-xl"
               aria-label="بازگشت"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight className="size-4 sm:size-5" />
             </Link>
             <div className="min-w-0 flex-1">
-              <h1 className="font-en truncate text-end text-sm font-semibold text-white sm:text-base" dir="ltr">
+              <h1 className="font-en truncate text-end text-[13px] font-semibold text-white sm:text-base" dir="ltr">
                 {movie.titleEn || movie.title}
               </h1>
             </div>
@@ -827,7 +827,7 @@ export function VideoPlayer({
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
-            className="nf-player-glass absolute bottom-28 right-3 z-20 w-[min(100%-1.5rem,18rem)] overflow-hidden rounded-2xl sm:bottom-32 sm:right-5"
+            className="nf-player-glass absolute bottom-[5.75rem] right-2 z-20 w-[min(100%-1rem,16rem)] overflow-hidden rounded-2xl sm:bottom-32 sm:right-5 sm:w-[min(100%-1.5rem,18rem)]"
           >
             <div className="relative h-20">
               <img src={poster} alt="" className="size-full object-cover opacity-55" />
@@ -881,15 +881,15 @@ export function VideoPlayer({
       <motion.div
         animate={{ opacity: chromeOn ? 1 : 0, y: chromeOn ? 0 : 12 }}
         transition={{ duration: reduceMotion ? 0.1 : 0.3 }}
-        className={cn(
-          'absolute inset-x-0 bottom-0 z-20 px-2.5 pb-2.5 pt-20 sm:px-4 sm:pb-4',
-          !chromeOn && 'pointer-events-none',
-        )}
-      >
-        <div className="nf-player-glass rounded-2xl px-2.5 py-2.5 sm:px-3.5 sm:py-3">
-          <div className="group/seek px-1 pt-0.5 sm:px-1.5">
-            <div className="flex items-center gap-2.5 text-[11px] tabular-nums text-white/65">
-              <span dir="ltr" data-en="true" className="font-en min-w-[2.75rem] shrink-0 text-start tracking-wide">
+          className={cn(
+            'absolute inset-x-0 bottom-0 z-20 px-1.5 pb-1.5 pt-14 sm:px-4 sm:pb-4 sm:pt-20',
+            !chromeOn && 'pointer-events-none',
+          )}
+        >
+        <div className="nf-player-glass rounded-xl px-1.5 py-1.5 sm:rounded-2xl sm:px-3.5 sm:py-3">
+          <div className="group/seek px-0.5 pt-0.5 sm:px-1.5">
+            <div className="flex items-center gap-1.5 text-[10px] tabular-nums text-white/65 sm:gap-2.5 sm:text-[11px]">
+              <span dir="ltr" data-en="true" className="font-en min-w-[2.25rem] shrink-0 text-start tracking-wide sm:min-w-[2.75rem]">
                 {currentTimeLabel}
               </span>
               <div
@@ -952,22 +952,34 @@ export function VideoPlayer({
                   className="player-range absolute inset-0 h-full w-full opacity-0"
                 />
               </div>
-              <span dir="ltr" data-en="true" className="font-en min-w-[2.75rem] shrink-0 text-end tracking-wide">
+              <span dir="ltr" data-en="true" className="font-en min-w-[2.25rem] shrink-0 text-end tracking-wide sm:min-w-[2.75rem]">
                 {remainLabel}
               </span>
             </div>
           </div>
 
-          <div className="mt-1.5 flex items-center justify-between gap-1 sm:mt-2">
-            <div className="flex items-center">
-              <PlayerBtn label={`عقب ${fa(SKIP_SEC)} ثانیه`} onClick={() => seekBySeconds(-SKIP_SEC)}>
-                <RotateCcw className="size-[1.15rem]" />
+          <div className="mt-0.5 flex items-center justify-between gap-0.5 sm:mt-2 sm:gap-1">
+            <div className="flex min-w-0 items-center">
+              <PlayerBtn
+                label={`عقب ${fa(SKIP_SEC)} ثانیه`}
+                onClick={() => seekBySeconds(-SKIP_SEC)}
+                className="max-[380px]:hidden"
+              >
+                <RotateCcw className="size-4 sm:size-[1.15rem]" />
               </PlayerBtn>
-              <PlayerBtn label={playing ? 'توقف' : 'پخش'} onClick={togglePlay} className="size-11">
-                {playing ? <Pause className="size-5 fill-current" /> : <Play className="size-5 fill-current" />}
+              <PlayerBtn label={playing ? 'توقف' : 'پخش'} onClick={togglePlay} className="size-9 sm:size-11">
+                {playing ? (
+                  <Pause className="size-4 fill-current sm:size-5" />
+                ) : (
+                  <Play className="size-4 fill-current sm:size-5" />
+                )}
               </PlayerBtn>
-              <PlayerBtn label={`جلو ${fa(SKIP_SEC)} ثانیه`} onClick={() => seekBySeconds(SKIP_SEC)}>
-                <RotateCw className="size-[1.15rem]" />
+              <PlayerBtn
+                label={`جلو ${fa(SKIP_SEC)} ثانیه`}
+                onClick={() => seekBySeconds(SKIP_SEC)}
+                className="max-[380px]:hidden"
+              >
+                <RotateCw className="size-4 sm:size-[1.15rem]" />
               </PlayerBtn>
 
               <div className="group/vol flex items-center">
@@ -976,9 +988,9 @@ export function VideoPlayer({
                   onClick={() => setMuted((m) => !m)}
                 >
                   {muted || volume === 0 ? (
-                    <VolumeX className="size-[1.15rem]" />
+                    <VolumeX className="size-4 sm:size-[1.15rem]" />
                   ) : (
-                    <Volume2 className="size-[1.15rem]" />
+                    <Volume2 className="size-4 sm:size-[1.15rem]" />
                   )}
                 </PlayerBtn>
                 <input
@@ -999,22 +1011,24 @@ export function VideoPlayer({
               </div>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex shrink-0 items-center">
               <PlayerBtn
                 label="زیرنویس"
                 active={prefs.subtitle !== 'خاموش'}
                 onClick={() => openSettings('subtitle')}
+                className="max-[360px]:hidden"
               >
                 {prefs.subtitle === 'خاموش' ? (
-                  <Captions className="size-[1.15rem]" />
+                  <Captions className="size-4 sm:size-[1.15rem]" />
                 ) : (
-                  <Subtitles className="size-[1.15rem]" />
+                  <Subtitles className="size-4 sm:size-[1.15rem]" />
                 )}
               </PlayerBtn>
               <PlayerBtn
                 label="سرعت پخش"
                 active={prefs.speed !== '۱×'}
                 onClick={() => openSettings('speed')}
+                className="max-sm:hidden"
               >
                 <span className="font-en text-[11px] font-bold tabular-nums tracking-wide" dir="ltr" data-en="true">
                   {prefs.speed === '۱×' ? <Gauge className="size-[1.15rem]" /> : prefs.speed}
@@ -1025,13 +1039,14 @@ export function VideoPlayer({
                 active={settingsOpen}
                 onClick={() => (settingsOpen ? setSettingsOpen(false) : openSettings('root'))}
               >
-                <Settings2 className="size-[1.15rem]" />
+                <Settings2 className="size-4 sm:size-[1.15rem]" />
               </PlayerBtn>
               {pipSupported && hasRealVideo ? (
                 <PlayerBtn
                   label={inPip ? 'خروج از تصویر در تصویر' : 'تصویر در تصویر'}
                   active={inPip}
                   onClick={() => void togglePip()}
+                  className="max-sm:hidden"
                 >
                   <PictureInPicture2 className="size-[1.15rem]" />
                 </PlayerBtn>
@@ -1040,7 +1055,11 @@ export function VideoPlayer({
                 label={isFullscreen ? 'خروج از تمام‌صفحه' : 'تمام‌صفحه'}
                 onClick={toggleFullscreen}
               >
-                {isFullscreen ? <Minimize className="size-[1.15rem]" /> : <Maximize className="size-[1.15rem]" />}
+                {isFullscreen ? (
+                  <Minimize className="size-4 sm:size-[1.15rem]" />
+                ) : (
+                  <Maximize className="size-4 sm:size-[1.15rem]" />
+                )}
               </PlayerBtn>
             </div>
           </div>
@@ -1073,7 +1092,7 @@ function PlayerBtn({
       aria-label={label}
       title={label}
       className={cn(
-        'grid size-10 place-items-center rounded-xl text-white/90 transition-colors',
+        'grid size-8 place-items-center rounded-lg text-white/90 transition-colors sm:size-10 sm:rounded-xl',
         'hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]/60',
         'disabled:pointer-events-none disabled:opacity-35',
         active && 'bg-white/10 text-[var(--brand)]',

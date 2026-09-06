@@ -1,4 +1,4 @@
-export type SaintstreamTitle = {
+﻿export type SaintstreamTitle = {
   id: string
   titleEn: string
   titleFa: string
@@ -59,7 +59,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.7,
     maturity: 'PG-13',
     duration: '۲س ۴۶د',
-    genres: ['علمی-تخیلی', 'ماجراجویی'],
+    genres: ['علمی‌تخیلی', 'ماجراجویی'],
     description:
       'پاول آترییدس با چانی و فرمن‌ها برای انتقام از توطئه‌گرانی که خانواده‌اش را نابود کردند متحد می‌شود.',
     type: 'Film',
@@ -103,7 +103,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 3.9,
     maturity: 'PG-13',
     duration: '۱س ۴۴د',
-    genres: ['اکشن', 'علمی-تخیلی'],
+    genres: ['اکشن', 'علمی‌تخیلی'],
     description: 'بری آلن با سفر در زمان سعی می‌کند گذشته را تغییر دهد اما جهان چندگانه را به خطر می‌اندازد.',
     type: 'Film',
   },
@@ -244,7 +244,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.1,
     maturity: 'PG-13',
     duration: '۲س ۲۶د',
-    genres: ['اکشن', 'هیجان'],
+    genres: ['اکشن', 'هیجان‌انگیز'],
     description: 'پاتان مأمور راو برای جلوگیری از حمله سلاح بیولوژیک به هند مأموریت می‌گیرد.',
     type: 'Film',
     live: true,
@@ -259,7 +259,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.6,
     maturity: 'TV-MA',
     duration: 'سریال',
-    genres: ['هیجان', 'درام'],
+    genres: ['هیجان‌انگیز', 'درام'],
     description: 'بازیکنان در بازی‌های مرگبار کودکی برای جایزه میلیاردی شرکت می‌کنند.',
     type: 'Series',
   },
@@ -344,7 +344,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.0,
     maturity: 'TV-14',
     duration: '۱س ۴۸د',
-    genres: ['درام', 'هیجان'],
+    genres: ['درام', 'هیجان‌انگیز'],
     description: 'پزشکی پس از مرگ مرموز خانواده‌اش راز فاجعهٔ ضدعفونی‌کنندهٔ مرطوب‌کننده را برملا می‌کند.',
     type: 'Film',
   },
@@ -400,7 +400,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.2,
     maturity: 'PG-13',
     duration: '۱س ۴۷د',
-    genres: ['هیجان', 'ماجراجویی'],
+    genres: ['هیجان‌انگیز', 'ماجراجویی'],
     description: 'دو دوست روی برج مخابراتی گیر می‌افتند و برای بقا می‌جنگند.',
     type: 'Film',
   },
@@ -456,7 +456,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.6,
     maturity: 'R',
     duration: '۲س ۴۹د',
-    genres: ['اکشن', 'هیجان'],
+    genres: ['اکشن', 'هیجان‌انگیز'],
     description: 'جان ویک برای آزادی از High Table با دشمنان قدرتمند در جهان می‌جنگد.',
     type: 'Film',
   },
@@ -485,7 +485,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.9,
     maturity: 'PG-13',
     duration: '۲س ۴۹د',
-    genres: ['علمی-تخیلی', 'درام'],
+    genres: ['علمی‌تخیلی', 'درام'],
     description:
       'گروهی از کاشفان از کرم‌چاله‌ای نزدیک زمین عبور می‌کنند تا بقای بشر را در سیاره‌ای دیگر تضمین کنند.',
     type: 'Film',
@@ -500,7 +500,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.8,
     maturity: 'PG-13',
     duration: '۲س ۲۸د',
-    genres: ['علمی-تخیلی', 'هیجان'],
+    genres: ['علمی‌تخیلی', 'هیجان‌انگیز'],
     description:
       'دزدی که وارد رؤیاهای دیگران می‌شود مأموریت نفوذ به ضمیر ناخودآگاه را برای کاشتن یک ایده می‌پذیرد.',
     type: 'Film',
@@ -560,7 +560,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.7,
     maturity: 'R',
     duration: '۲س ۱۹د',
-    genres: ['کمدی', 'علمی-تخیلی'],
+    genres: ['کمدی', 'علمی‌تخیلی'],
     description:
       'یک زن میانسال صاحب لاندری باید نسخه‌های بی‌شمار خود را در جهان‌های موازی نجات دهد.',
     type: 'Film',
@@ -575,7 +575,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.9,
     maturity: 'R',
     duration: '۲س ۱۲د',
-    genres: ['درام', 'هیجان'],
+    genres: ['درام', 'هیجان‌انگیز'],
     description:
       'خانواده‌ای فقیر با نفوذ تدریجی به خانهٔ ثروتمندان، تعادل شکننده‌ای می‌سازند که به‌سرعت از هم می‌پاشد.',
     type: 'Film',
@@ -590,7 +590,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.5,
     maturity: 'PG-13',
     duration: '۳س ۱۲د',
-    genres: ['علمی-تخیلی', 'ماجراجویی'],
+    genres: ['علمی‌تخیلی', 'ماجراجویی'],
     description:
       'جیک سولی و خانواده‌اش در میان قبایل دریایی پاندورا پناه می‌گیرند تا از تهدید جدید انسان‌ها در امان بمانند.',
     type: 'Film',
@@ -620,7 +620,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.7,
     maturity: 'TV-14',
     duration: 'سریال',
-    genres: ['علمی-تخیلی', 'ترسناک'],
+    genres: ['علمی‌تخیلی', 'ترسناک'],
     description:
       'در هاوکینز دههٔ ۸۰، ناپدید شدن یک پسر پرده از آزمایش‌های سری و دنیای وارونه برمی‌دارد.',
     type: 'Series',
@@ -650,7 +650,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.8,
     maturity: 'TV-MA',
     duration: 'سریال',
-    genres: ['علمی-تخیلی', 'معمایی'],
+    genres: ['علمی‌تخیلی', 'معمایی'],
     description:
       'ناپدید شدن کودکان در شهر ویندن راز سفر در زمان و پیوند خانواده‌ها در دهه‌های مختلف را آشکار می‌کند.',
     type: 'Series',
@@ -920,7 +920,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.6,
     maturity: 'R',
     duration: '۲س ۱۸د',
-    genres: ['معمایی', 'هیجان'],
+    genres: ['معمایی', 'هیجان‌انگیز'],
     description: 'مارشال تدی دانیلز در آسایشگاه جزیره راز بیمار گمشده را می‌کاود.',
     type: 'Film',
   },
@@ -962,7 +962,7 @@ const titles: Record<string, SaintstreamTitle> = {
     rating: 4.8,
     maturity: 'R',
     duration: '۲س ۷د',
-    genres: ['هیجان', 'جنایی'],
+    genres: ['هیجان‌انگیز', 'جنایی'],
     description: 'دو کارآگاه قاتلی را دنبال می‌کنند که با هفت گناه کبیره قتل می‌کند.',
     type: 'Film',
   },

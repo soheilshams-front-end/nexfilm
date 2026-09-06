@@ -10,6 +10,7 @@ import {
 } from '@/lib/title-credits'
 import { fa } from '@/lib/format-fa'
 import { seriesEpisodes } from '@/lib/series-episodes'
+import { canonicalizeGenres } from '@/lib/genre-canonical'
 
 export { fa } from '@/lib/format-fa'
 
@@ -183,6 +184,7 @@ function withCatalogDefaults(movie: Movie): Movie {
     ...movie,
     access,
     maturity: normalizeMaturity(movie.maturity),
+    genres: canonicalizeGenres(movie.genres),
     tagline: movie.tagline || credits?.tagline || movie.genres.slice(0, 2).join(' · '),
     director: movie.director && movie.director !== 'کارگردان' ? movie.director : credits?.director || movie.director,
     cast:
@@ -747,7 +749,7 @@ export function resolveTitle(id: string): Movie | undefined {
     rating,
     maturity: normalizeMaturity(ss.maturity),
     duration: ss.duration,
-    genres: ss.genres,
+    genres: canonicalizeGenres(ss.genres),
     cast: credits?.cast.map((c) => c.name) ?? [],
     director: credits?.director || '—',
     type: ss.type,

@@ -41,14 +41,14 @@ export function SiteFooter({ className }: { className?: string }) {
             </p>
             <div className="mt-5 flex items-center gap-2 md:mt-6">
               {social.map(({ Icon, label }) => (
-                <a
+                <span
                   key={label}
-                  href="#"
-                  className="grid size-10 place-items-center rounded-lg text-[var(--brand)] ring-1 ring-[var(--border-brand)] transition-colors hover:bg-[var(--brand-soft)]"
+                  className="grid size-10 place-items-center rounded-lg text-[var(--brand)]/70 ring-1 ring-[var(--border-brand)]"
                   aria-label={label}
+                  title="به‌زودی"
                 >
                   <Icon className="size-4" />
-                </a>
+                </span>
               ))}
             </div>
           </div>

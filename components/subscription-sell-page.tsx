@@ -53,6 +53,7 @@ export function SubscriptionSellPage() {
   const [renewsAt, setRenewsAt] = useState<string | null>(null)
   const [selected, setSelected] = useState<PaidPlanId>('yearly')
   const [busy, setBusy] = useState(false)
+  const [step, setStep] = useState<'pick' | 'confirm'>('pick')
 
   useEffect(() => {
     setPremium(hasPremiumAccess())
@@ -62,13 +63,25 @@ export function SubscriptionSellPage() {
   const plan = subscriptionPlans.find((p) => p.id === selected) ?? subscriptionPlans[2]
 
   const onBuy = () => {
+    if (step === 'pick') {
+      setStep('confirm')
+      return
+    }
     setBusy(true)
     activatePlan(plan.id)
     setPremium(true)
-    toast(`پلن ${plan.name} فعال شد`)
+    toast(`پلن ${plan.name} به‌صورت آزمایشی (لوکال) فعال شد`)
     setBusy(false)
+    setStep('pick')
     router.push('/profile/subscription')
   }
+
+  const ctaLabel =
+    step === 'confirm'
+      ? busy
+        ? 'در حال فعال‌سازی…'
+        : `تأیید فعال‌سازی ${plan.name}`
+      : `ادامه با پلن ${plan.name}`
 
   return (
     // Mobile: clear sticky CTA only — tab bar clearance lives on SiteFooter.tabbar-pad
@@ -116,7 +129,10 @@ export function SubscriptionSellPage() {
                   type="button"
                   role="tab"
                   aria-selected={selected === p.id}
-                  onClick={() => setSelected(p.id)}
+                  onClick={() => {
+                    setSelected(p.id)
+                    setStep('pick')
+                  }}
                   className={cn(
                     'relative h-9 rounded-[10px] text-[12px] font-semibold transition-colors md:h-10 md:text-[13px]',
                     selected === p.id
@@ -160,14 +176,28 @@ export function SubscriptionSellPage() {
                 </div>
               ) : (
                 <>
+                  {step === 'confirm' ? (
+                    <p className="mb-3 rounded-xl bg-white/[0.06] px-3 py-2.5 text-center text-[12px] leading-5 text-white/65">
+                      فعال‌سازی آزمایشی روی همین دستگاه — درگاه بانکی وصل نیست. ادامه می‌دهید؟
+                    </p>
+                  ) : null}
                   <Button
                     size="lg"
                     className="w-full rounded-xl"
                     isDisabled={busy}
                     onPress={onBuy}
                   >
-                    {busy ? 'در حال فعال‌سازی…' : `شروع با پلن ${plan.name}`}
+                    {ctaLabel}
                   </Button>
+                  {step === 'confirm' ? (
+                    <button
+                      type="button"
+                      className="mt-2 w-full text-center text-[12px] text-white/45 hover:text-white/70"
+                      onClick={() => setStep('pick')}
+                    >
+                      بازگشت
+                    </button>
+                  ) : null}
                   <p className="mt-3 text-center text-[12px] text-white/35">
                     فعال‌سازی آزمایشی است. درگاه بانکی هنوز وصل نیست.
                   </p>
@@ -186,7 +216,7 @@ export function SubscriptionSellPage() {
           </Button>
         ) : (
           <Button size="lg" className="w-full rounded-xl" isDisabled={busy} onPress={onBuy}>
-            {busy ? 'در حال فعال‌سازی…' : `شروع با پلن ${plan.name}`}
+            {ctaLabel}
           </Button>
         )}
       </div>

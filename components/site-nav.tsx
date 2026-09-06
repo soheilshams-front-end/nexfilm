@@ -58,19 +58,19 @@ export function SiteNav() {
       <header
         className={cn(
           'fixed inset-x-0 top-0 z-50 min-w-0',
-          'px-2 pt-2 md:px-5 md:pt-4',
+          'px-1.5 pt-1.5 md:px-5 md:pt-4',
         )}
       >
         <div
           className={cn(
-            'page-max mx-auto flex min-w-0 items-center gap-1.5 transition-all duration-300 sm:gap-2',
-            'h-12 rounded-xl px-2 md:h-16 md:gap-4 md:rounded-2xl md:px-5',
+            'page-max mx-auto flex min-w-0 items-center gap-1 transition-all duration-300 sm:gap-2',
+            'h-10 rounded-xl px-1.5 md:h-16 md:gap-4 md:rounded-2xl md:px-5',
             scrolled
               ? 'border border-white/10 bg-[rgba(var(--bg-rgb),0.82)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] backdrop-blur-xl'
               : 'border border-transparent bg-transparent md:border-transparent',
           )}
         >
-          <BrandLockup size={36} compactMobile />
+          <BrandLockup size={32} compactMobile />
 
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 rounded-full bg-white/[0.04] p-1 ring-1 ring-white/10 lg:flex">
             {desktopLinks.map((l) => {
@@ -93,7 +93,7 @@ export function SiteNav() {
             })}
           </nav>
 
-          <div className="mr-auto flex min-w-0 shrink-0 items-center gap-0.5 sm:gap-1 md:gap-2">
+          <div className="mr-auto flex min-w-0 shrink-0 items-center gap-0.5 md:gap-2">
             <Button
               type="button"
               variant="ghost"
@@ -114,15 +114,15 @@ export function SiteNav() {
               <Link href="/my-list">لیست من</Link>
             </Button>
 
-            {/* Mobile: icon-only crown */}
+            {/* Mobile: compact crown */}
             <Button
               asChild
               variant="ghost"
-              size="icon"
-              className="size-9 rounded-lg text-[var(--brand)] hover:bg-white/10 md:hidden"
+              size="icon-sm"
+              className="size-8 rounded-lg text-[var(--brand)] hover:bg-white/10 md:hidden [&_svg]:size-3.5"
             >
               <Link href="/subscription" aria-label="اشتراک">
-                <Crown className="size-4" />
+                <Crown />
               </Link>
             </Button>
 
@@ -142,11 +142,11 @@ export function SiteNav() {
               <Button
                 asChild
                 variant="ghost"
-                size="icon"
-                className="size-9 overflow-hidden rounded-lg p-0 md:size-10 md:rounded-xl"
+                size="icon-sm"
+                className="size-8 overflow-hidden rounded-lg p-0 md:size-10 md:rounded-xl"
               >
                 <Link href="/profile" aria-label="پروفایل">
-                  <Avatar src={avatar} size="md" alt="پروفایل" />
+                  <Avatar src={avatar} size="sm" alt="پروفایل" className="size-full md:size-10 md:text-sm" />
                 </Link>
               </Button>
             ) : (
@@ -154,7 +154,7 @@ export function SiteNav() {
                 asChild
                 variant="ghost"
                 size="sm"
-                className="h-9 rounded-lg px-2.5 text-[13px] text-white/80 hover:text-white md:h-10 md:rounded-xl md:px-3.5 md:text-sm"
+                className="h-8 rounded-lg px-2 text-[12px] text-white/80 hover:text-white md:h-10 md:rounded-xl md:px-3.5 md:text-sm"
               >
                 <Link href="/login">ورود</Link>
               </Button>

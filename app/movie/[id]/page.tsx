@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
-import { MovieRow } from '@/components/movie-row'
+import { MovieScroller } from '@/components/saintstream/movie-scroller'
 import { CastSlider } from '@/components/cast-slider'
 import { DetailHero } from '@/components/detail-hero'
 import { fa } from '@/lib/format-fa'
@@ -11,6 +12,25 @@ import { TrailerPlayer } from '@/components/trailer-player'
 
 export function generateStaticParams() {
   return listRoutableIds().map((id) => ({ id }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const movie = resolveTitle(id)
+  if (!movie || movie.type === 'Series') return { title: 'فیلم پیدا نشد' }
+  return {
+    title: `${movie.titleEn || movie.title} | نکس فیلم`,
+    description: movie.description.slice(0, 160),
+    openGraph: {
+      title: movie.titleEn || movie.title,
+      description: movie.description.slice(0, 160),
+      images: [movie.poster],
+    },
+  }
 }
 
 export default async function MovieDetailsPage({
@@ -33,17 +53,17 @@ export default async function MovieDetailsPage({
       <SiteNav />
       <DetailHero movie={movie} />
 
-      <div className="relative z-10 -mt-6 space-y-10 bg-gradient-to-b from-transparent via-black to-black pb-10 sm:-mt-10 sm:space-y-12">
-        <div className="page-max page-pad grid w-full min-w-0 gap-6 overflow-x-hidden sm:gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(240px,0.75fr)] lg:gap-10">
-          <div className="space-y-8">
+      <div className="relative z-10 -mt-4 space-y-8 overflow-x-hidden bg-gradient-to-b from-transparent via-black to-black pb-10 sm:-mt-10 sm:space-y-12">
+        <div className="page-max page-pad grid w-full min-w-0 gap-5 sm:gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(240px,0.75fr)] lg:gap-10">
+          <div className="min-w-0 space-y-6 sm:space-y-8">
             <section className="reveal is-visible">
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <h2 className="text-[1.15rem] font-bold text-white sm:text-[1.35rem]">تریلر</h2>
-                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-white/60">
+              <div className="mb-2.5 flex items-center justify-between gap-3 sm:mb-3">
+                <h2 className="text-[1.05rem] font-bold text-white sm:text-[1.35rem]">تریلر</h2>
+                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white/60 sm:px-2.5 sm:py-1 sm:text-[11px]">
                   رسمی
                 </span>
               </div>
-              <div className="overflow-hidden rounded-[18px] bg-[#0a0a0a] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
+              <div className="overflow-hidden rounded-[14px] bg-[#0a0a0a] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.45)] sm:rounded-[18px]">
                 {embed ? (
                   <TrailerPlayer
                     embedUrl={embed}
@@ -91,9 +111,9 @@ export default async function MovieDetailsPage({
           </div>
 
           <aside className="space-y-4 lg:pt-1 reveal is-visible">
-            <div className="rounded-[18px] bg-white/[0.04] p-5 ring-1 ring-white/10">
-              <h3 className="text-[15px] font-bold text-white">درباره اثر</h3>
-              <dl className="mt-4 space-y-3 text-[13px]">
+            <div className="rounded-[14px] bg-white/[0.04] p-4 ring-1 ring-white/10 sm:rounded-[18px] sm:p-5">
+              <h3 className="text-[14px] font-bold text-white sm:text-[15px]">درباره اثر</h3>
+              <dl className="mt-3 space-y-2.5 text-[12px] sm:mt-4 sm:space-y-3 sm:text-[13px]">
                 {crew.map((c) => (
                   <div key={c.id} className="flex items-start justify-between gap-3">
                     <dt className="text-white/40">{c.role}</dt>
@@ -115,7 +135,7 @@ export default async function MovieDetailsPage({
 
         {similar.length > 0 ? (
           <div className="pb-4">
-            <MovieRow title="آثار مشابه" movies={similar} />
+            <MovieScroller title="آثار مشابه" items={similar} href="/movies" />
           </div>
         ) : null}
       </div>

@@ -6,6 +6,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { DashboardShell, PageHeader } from '@/components/dashboard/dashboard-shell'
 import { Toggle } from '@/components/dashboard/toggle'
 import { SectionCard } from '@/components/dashboard/ui-bits'
+import { DemoModeBanner } from '@/components/demo-mode-banner'
 import { securityLog, userData } from '@/lib/user-data'
 import { fa } from '@/lib/format-fa'
 import { cn } from '@/lib/utils'
@@ -21,13 +22,14 @@ export default function SecurityPage() {
     <main className="min-h-screen">      <SiteNav />
       <DashboardShell>
         <PageHeader title="امنیت و رمز عبور" subtitle="از حساب خود محافظت کنید" />
+        <DemoModeBanner detail="فرم‌ها نمایشی‌اند؛ رمز و ۲FA به سرور وصل نیست." />
 
         <SectionCard title="تغییر رمز عبور">
           <div className="space-y-3 p-3">
-            <input type="password" placeholder="رمز فعلی" className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] outline-none focus:border-primary" />
-            <input type="password" placeholder="رمز جدید" className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] outline-none focus:border-primary" />
-            <input type="password" placeholder="تکرار رمز جدید" className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] outline-none focus:border-primary" />
-            <button type="button" className="btn-filled text-[15px]">ذخیره رمز جدید</button>
+            <input type="password" placeholder="رمز فعلی" disabled className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] opacity-60 outline-none" />
+            <input type="password" placeholder="رمز جدید" disabled className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] opacity-60 outline-none" />
+            <input type="password" placeholder="تکرار رمز جدید" disabled className="w-full rounded-[12px] border border-[var(--separator)] bg-black/40 px-4 py-3 text-[15px] opacity-60 outline-none" />
+            <button type="button" disabled className="btn-filled text-[15px] opacity-50">ذخیره رمز جدید</button>
           </div>
         </SectionCard>
 

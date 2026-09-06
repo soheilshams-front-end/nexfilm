@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   saintstreamHome,
   getAllSaintstreamTitles,
@@ -15,6 +15,9 @@ import { HomeBottomGrid } from '@/components/home-bottom-grid'
 import { ContinueWatchingRow } from '@/components/continue-watching-row'
 import { HomePremiumBanner } from '@/components/home-premium-banner'
 import { NewEpisodesRow } from '@/components/new-episodes-row'
+import { isKidsProfileActive } from '@/lib/user-store'
+import { isKidsSafeMaturity } from '@/lib/title-credits'
+import { genresMatch, canonicalizeGenre } from '@/lib/genre-canonical'
 
 const DEFAULT_FILTER: HomeFilterState = {
   kind: 'all',
@@ -23,12 +26,17 @@ const DEFAULT_FILTER: HomeFilterState = {
   scope: 'all',
 }
 
-function applyHomeFilter(catalog: SaintstreamTitle[], filter: HomeFilterState): SaintstreamTitle[] {
+function applyHomeFilter(
+  catalog: SaintstreamTitle[],
+  filter: HomeFilterState,
+  kidsMode: boolean,
+): SaintstreamTitle[] {
   let list = [...catalog]
+  if (kidsMode) list = list.filter((t) => isKidsSafeMaturity(t.maturity))
 
   if (filter.kind === 'film') list = list.filter((t) => t.type === 'Film')
   if (filter.kind === 'series') list = list.filter((t) => t.type === 'Series')
-  if (filter.genre) list = list.filter((t) => t.genres.includes(filter.genre!))
+  if (filter.genre) list = list.filter((t) => genresMatch(t.genres, filter.genre!))
 
   if (filter.scope === 'trending') {
     list = [...list].sort((a, b) => b.rating - a.rating)
@@ -64,6 +72,10 @@ function filterLabel(filter: HomeFilterState): string {
   return parts.length ? `نتایج: ${parts.join(' · ')}` : 'نتایج فیلتر'
 }
 
+function kidsSafe(list: SaintstreamTitle[], kids: boolean) {
+  return kids ? list.filter((t) => isKidsSafeMaturity(t.maturity)) : list
+}
+
 export function HomeContent() {
   const {
     justRelease,
@@ -77,23 +89,53 @@ export function HomeContent() {
     popularList,
   } = saintstreamHome
 
-  const genres = useMemo(() => getSaintstreamGenres(), [])
+  const [kidsMode, setKidsMode] = useState(false)
+  useEffect(() => {
+    setKidsMode(isKidsProfileActive())
+  }, [])
+
+  const genres = useMemo(
+    () => getSaintstreamGenres().map(canonicalizeGenre),
+    [],
+  )
   const catalog = useMemo(() => getAllSaintstreamTitles(), [])
   const [filter, setFilter] = useState<HomeFilterState>(DEFAULT_FILTER)
 
   const showDefault = isDefaultFilter(filter)
-  const filtered = useMemo(() => applyHomeFilter(catalog, filter), [catalog, filter])
+  const filtered = useMemo(
+    () => applyHomeFilter(catalog, filter, kidsMode),
+    [catalog, filter, kidsMode],
+  )
+
+  const safeJust = useMemo(() => kidsSafe(justRelease, kidsMode), [justRelease, kidsMode])
+  const safePopular = useMemo(() => kidsSafe(popularWeek, kidsMode), [popularWeek, kidsMode])
+  const safeMovies = useMemo(() => kidsSafe(movies, kidsMode), [movies, kidsMode])
+  const safeSeries = useMemo(() => kidsSafe(series, kidsMode), [series, kidsMode])
+  const safeKorean = useMemo(() => kidsSafe(koreanSeries, kidsMode), [koreanSeries, kidsMode])
+  const safeFeaturedSide = useMemo(() => kidsSafe(featuredSide, kidsMode), [featuredSide, kidsMode])
+  const safePopularList = useMemo(() => kidsSafe(popularList, kidsMode), [popularList, kidsMode])
+  const safeFeatured =
+    kidsMode && !isKidsSafeMaturity(featured.maturity)
+      ? safeJust[0] ?? featured
+      : featured
+  const safeAward =
+    kidsMode && !isKidsSafeMaturity(award.maturity) ? safeMovies[0] ?? award : award
+
   const editors = useMemo(() => {
     const ids = new Set<string>()
     const out: SaintstreamTitle[] = []
-    for (const t of [saintstreamHome.featured, ...saintstreamHome.featuredSide, ...saintstreamHome.popularList]) {
+    const pool = kidsSafe(
+      [saintstreamHome.featured, ...saintstreamHome.featuredSide, ...saintstreamHome.popularList],
+      kidsMode,
+    )
+    for (const t of pool) {
       if (ids.has(t.id)) continue
       ids.add(t.id)
       out.push(t)
       if (out.length >= 4) break
     }
     return out
-  }, [])
+  }, [kidsMode])
 
   return (
     <div className="relative z-10 space-y-0 bg-transparent pb-4">
@@ -103,14 +145,14 @@ export function HomeContent() {
       {showDefault ? (
         <>
           <ContinueWatchingRow />
-          <MovieScroller title="تازه منتشر شده" items={justRelease} href="/movies" />
-          <NewEpisodesRow />
-          <PopularWeekRow items={popularWeek} />
-          <FeaturedBanner featured={featured} sidePosters={featuredSide} />
-          <MovieScroller title="فیلم‌ها" items={movies} href="/movies" />
-          <MovieScroller title="سریال‌ها" items={series} href="/series" />
-          <MovieScroller title="سریال‌های آسیایی" items={koreanSeries} href="/series" />
-          <HomeBottomGrid award={award} popular={popularList} editors={editors} />
+          <MovieScroller title="تازه منتشر شده" items={safeJust} href="/movies" />
+          {!kidsMode ? <NewEpisodesRow /> : null}
+          <PopularWeekRow items={safePopular} />
+          <FeaturedBanner featured={safeFeatured} sidePosters={safeFeaturedSide} />
+          <MovieScroller title="فیلم‌ها" items={safeMovies} href="/movies" />
+          <MovieScroller title="سریال‌ها" items={safeSeries} href="/series" />
+          <MovieScroller title="سریال‌های آسیایی" items={safeKorean} href="/series" />
+          <HomeBottomGrid award={safeAward} popular={safePopularList} editors={editors} />
         </>
       ) : (
         <>
@@ -118,17 +160,9 @@ export function HomeContent() {
           <MovieScroller title={filterLabel(filter)} items={filtered} href="/browse" />
           {filtered.length === 0 ? (
             <div className="page-pad page-max pb-16 text-center">
-              <p className="text-sm text-white/50">موردی با این فیلتر پیدا نشد.</p>
-              <button
-                type="button"
-                onClick={() => setFilter(DEFAULT_FILTER)}
-                className="mt-3 rounded-full bg-white/10 px-4 py-2 text-[13px] font-semibold text-white ring-1 ring-white/10 hover:bg-white/16"
-              >
-                پاک کردن فیلتر
-              </button>
+              <p className="text-white/60">نتیجه‌ای پیدا نشد.</p>
             </div>
           ) : null}
-          <PopularWeekRow items={popularWeek} />
         </>
       )}
     </div>
