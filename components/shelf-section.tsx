@@ -62,7 +62,7 @@ export function ShelfTrack({
   onScrollEnd?: () => void
 }) {
   return (
-    <div className="relative px-[var(--space-page-x)]">
+    <div className="shelf-hover-zone relative">
       <div
         ref={scrollerRef}
         role="list"
@@ -70,12 +70,14 @@ export function ShelfTrack({
         onKeyDown={onKeyDown}
         aria-label={label}
         className={cn(
-          'no-scrollbar flex gap-[var(--poster-gap)] overflow-x-auto pb-1',
+          'shelf-track no-scrollbar flex gap-[var(--poster-gap)] px-[var(--space-page-x)]',
           '[scroll-snap-type:x_mandatory]',
           className,
         )}
       >
         {children}
+        {/* end spacer so last card can scale without clipping */}
+        <div className="w-[var(--shelf-hover-pad)] shrink-0" aria-hidden />
       </div>
 
       {showArrows ? (
@@ -85,7 +87,7 @@ export function ShelfTrack({
             aria-label="قبلی"
             onClick={onScrollStart}
             className={cn(
-              'absolute top-1/2 z-[2] hidden size-9 -translate-y-1/2 place-items-center lg:grid',
+              'absolute top-1/2 z-[70] hidden size-9 -translate-y-1/2 place-items-center lg:grid',
               'rounded-full bg-black/55 text-white/90 ring-1 ring-white/15 backdrop-blur-sm',
               'transition-colors hover:bg-black/75 hover:text-white',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]',
@@ -100,7 +102,7 @@ export function ShelfTrack({
             aria-label="بعدی"
             onClick={onScrollEnd}
             className={cn(
-              'absolute top-1/2 z-[2] hidden size-9 -translate-y-1/2 place-items-center lg:grid',
+              'absolute top-1/2 z-[70] hidden size-9 -translate-y-1/2 place-items-center lg:grid',
               'rounded-full bg-black/55 text-white/90 ring-1 ring-white/15 backdrop-blur-sm',
               'transition-colors hover:bg-black/75 hover:text-white',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]',
@@ -130,7 +132,7 @@ export function ShelfSection({
   className?: string
 }) {
   return (
-    <section className={cn('reveal py-[var(--section-py)]', className)}>
+    <section className={cn('shelf-section reveal py-[var(--section-py)]', className)}>
       <SectionHeader title={title} href={href} seeAllLabel={seeAllLabel} />
       {children}
     </section>

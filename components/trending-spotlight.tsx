@@ -38,7 +38,9 @@ export function TrendingSpotlight({ items }: { items: Movie[] }) {
               <TrendingUp className="size-3" />
               رتبه ۱
             </span>
-            <h3 className="text-2xl font-bold text-white sm:text-3xl">{main.title}</h3>
+            <h3 className="font-en text-end text-2xl font-bold text-white sm:text-3xl" dir="ltr">
+              {main.titleEn || main.title}
+            </h3>
             <div className="mt-2 flex flex-wrap gap-3 text-sm text-white/80">
               <span className="flex items-center gap-1 font-semibold text-primary">
                 <Star className="size-3.5 fill-primary" />
@@ -68,7 +70,9 @@ export function TrendingSpotlight({ items }: { items: Movie[] }) {
               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-4">
                 <span className="text-xs font-bold text-primary">رتبه {fa(i + 2)}</span>
-                <h3 className="mt-1 font-bold leading-tight text-white">{m.title}</h3>
+                <h3 className="font-en mt-1 text-end font-bold leading-tight text-white" dir="ltr">
+                  {m.titleEn || m.title}
+                </h3>
                 <span className="mt-1 flex items-center gap-1 text-xs text-white/70">
                   <Star className="size-3 fill-primary text-primary" />
                   {fa(m.rating.toFixed(1))}

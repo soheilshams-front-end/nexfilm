@@ -32,7 +32,7 @@ export function FeaturedBanner({
               ویژه نکس‌فیلم
             </p>
             <h2
-              className="mt-2.5 max-w-xl text-[clamp(1.35rem,4vw,36px)] font-bold leading-tight text-white sm:mt-3"
+              className="font-en mt-2.5 max-w-xl text-end text-[clamp(1.35rem,4vw,36px)] font-bold leading-tight text-white sm:mt-3"
               dir="ltr"
             >
               {featured.titleEn || featured.titleFa}

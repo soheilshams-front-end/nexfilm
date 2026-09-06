@@ -1,64 +1,85 @@
 'use client'
 
 import Link from 'next/link'
-import { Play, Calendar } from 'lucide-react'
+import { Play } from 'lucide-react'
 import { fa } from '@/lib/format-fa'
 import { getNewEpisodes } from '@/lib/movies'
+import { TitleText } from '@/components/title-text'
+import { ShelfSection, ShelfTrack, useShelfScroller } from '@/components/shelf-section'
 
 export function NewEpisodesRow() {
   const eps = getNewEpisodes()
+  const { scroller, onKeyDown, scrollByDir } = useShelfScroller()
   if (!eps.length) return null
 
   return (
-    <section className="reveal w-full min-w-0 overflow-x-hidden">
-      <div className="mb-3 flex min-w-0 items-center gap-2.5 page-pad sm:mb-4 sm:gap-3">
-        <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary sm:size-8">
-          <Calendar className="size-3.5 sm:size-4" />
-        </span>
-        <div className="min-w-0">
-          <h2 className="truncate text-base font-semibold text-white sm:text-lg md:text-xl">
-            قسمت‌های جدید
-          </h2>
-          <p className="truncate text-[11px] text-muted-foreground sm:text-xs">
-            آخرین قسمت‌های سریال‌ها
-          </p>
-        </div>
-      </div>
+    <ShelfSection title="قسمت‌های جدید" href="/series" seeAllLabel="همه سریال‌ها">
+      <ShelfTrack
+        scrollerRef={scroller}
+        label="قسمت‌های جدید"
+        onKeyDown={onKeyDown}
+        onScrollStart={() => scrollByDir('start')}
+        onScrollEnd={() => scrollByDir('end')}
+      >
+        {eps.map(({ movie, ep }) => {
+          const seriesName = movie.titleEn || movie.title
+          return (
+            <Link
+              key={`${movie.id}-${ep.season}-${ep.episode}`}
+              href={`/watch/${movie.id}?s=${ep.season}&e=${ep.episode}`}
+              tabIndex={0}
+              className="focus-tile group block w-[min(17.5rem,78vw)] shrink-0 snap-start outline-none sm:w-[19.5rem] md:w-[21rem]"
+            >
+              <div className="focus-tile-media relative aspect-video overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.08]">
+                <img
+                  src={movie.backdrop || movie.poster}
+                  alt=""
+                  className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = movie.poster || '/placeholder.svg'
+                  }}
+                />
 
-      <div className="no-scrollbar flex gap-2.5 overflow-x-auto overscroll-x-contain px-[var(--space-page-x)] pb-2 sm:gap-3">
-        {eps.map(({ movie, ep }) => (
-          <Link
-            key={`${movie.id}-${ep.season}-${ep.episode}`}
-            href={`/watch/${movie.id}?s=${ep.season}&e=${ep.episode}`}
-            className="group flex w-[min(15.5rem,72vw)] shrink-0 gap-2 rounded-xl border border-white/[0.08] bg-card/80 p-2 transition-colors hover:border-primary/40 sm:w-[17.5rem] sm:gap-2.5 sm:rounded-lg sm:p-2.5 md:w-72 md:gap-3 md:p-3"
-          >
-            <div className="relative h-[3.75rem] w-[5.5rem] shrink-0 overflow-hidden rounded-md sm:h-[4.25rem] sm:w-[6.25rem] md:h-24 md:w-36">
-              <img
-                src={movie.backdrop || movie.poster}
-                alt=""
-                className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="absolute inset-0 grid place-items-center bg-black/0 opacity-0 transition-all group-hover:bg-black/40 group-hover:opacity-100">
-                <Play className="size-4 fill-white text-white sm:size-5 md:size-6" />
-              </span>
-              <span className="absolute right-1 top-1 max-w-[calc(100%-0.5rem)] truncate rounded bg-primary px-1 py-0.5 text-[8px] font-bold text-white sm:right-1.5 sm:top-1.5 sm:px-1.5 sm:text-[10px]">
-                {ep.addedAgo}
-              </span>
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 overflow-hidden">
-              <p className="truncate text-[10px] font-semibold text-primary sm:text-[11px]">
-                فصل {fa(ep.season)} · قسمت {fa(ep.episode)}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(var(--bg-rgb),0.88)] via-[rgba(var(--bg-rgb),0.2)] to-transparent"
+                />
+
+                <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="grid size-11 place-items-center rounded-full bg-white/95 text-black shadow-[0_8px_28px_rgba(0,0,0,0.45)] sm:size-12">
+                    <Play className="size-4 fill-current ms-0.5 sm:size-5" />
+                  </span>
+                </span>
+
+                <span className="absolute start-2.5 top-2.5 rounded-md bg-black/55 px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-white/90 ring-1 ring-white/12 backdrop-blur-sm sm:start-3 sm:top-3 sm:text-[11px]">
+                  فصل {fa(ep.season)} · قسمت {fa(ep.episode)}
+                </span>
+
+                <span className="absolute end-2.5 top-2.5 text-[10px] font-medium text-white/70 sm:end-3 sm:top-3 sm:text-[11px]">
+                  {ep.addedAgo}
+                </span>
+
+                <div className="absolute inset-x-0 bottom-0 z-[1] p-2.5 sm:p-3.5">
+                  <TitleText
+                    as="h3"
+                    className="line-clamp-1 text-[13px] font-semibold leading-snug text-white drop-shadow-sm sm:text-[15px]"
+                  >
+                    {ep.episodeTitle}
+                  </TitleText>
+                </div>
+              </div>
+
+              <p
+                className="font-en mt-2 truncate px-0.5 text-start text-[12px] tracking-wide text-white/55 sm:mt-2.5 sm:text-[13px]"
+                dir="ltr"
+              >
+                {seriesName}
               </p>
-              <h3 className="truncate text-[12px] font-bold text-white sm:text-[13px] md:text-sm">
-                {ep.episodeTitle}
-              </h3>
-              <p className="truncate text-[10px] text-muted-foreground sm:text-[11px] md:text-xs">
-                {movie.title}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+            </Link>
+          )
+        })}
+      </ShelfTrack>
+    </ShelfSection>
   )
 }

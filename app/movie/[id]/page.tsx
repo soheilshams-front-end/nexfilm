@@ -36,7 +36,7 @@ export default async function MovieDetailsPage({
       <div className="relative z-10 -mt-6 space-y-10 bg-gradient-to-b from-transparent via-black to-black pb-10 sm:-mt-10 sm:space-y-12">
         <div className="page-max page-pad grid w-full min-w-0 gap-6 overflow-x-hidden sm:gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(240px,0.75fr)] lg:gap-10">
           <div className="space-y-8">
-            <section>
+            <section className="reveal is-visible">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <h2 className="text-[1.15rem] font-bold text-white sm:text-[1.35rem]">تریلر</h2>
                 <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-white/60">
@@ -68,7 +68,7 @@ export default async function MovieDetailsPage({
             <CastSlider titleId={movie.id} />
 
             {reviews.length > 0 ? (
-              <section>
+              <section className="reveal is-visible">
                 <h2 className="mb-4 text-[1.15rem] font-bold text-white sm:text-[1.35rem]">نقدها</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {reviews.map((r) => (
@@ -90,7 +90,7 @@ export default async function MovieDetailsPage({
             ) : null}
           </div>
 
-          <aside className="space-y-4 lg:pt-1">
+          <aside className="space-y-4 lg:pt-1 reveal is-visible">
             <div className="rounded-[18px] bg-white/[0.04] p-5 ring-1 ring-white/10">
               <h3 className="text-[15px] font-bold text-white">درباره اثر</h3>
               <dl className="mt-4 space-y-3 text-[13px]">

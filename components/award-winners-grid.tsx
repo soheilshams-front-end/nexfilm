@@ -45,15 +45,15 @@ export function AwardWinnersGrid({ movies }: { movies: Movie[] }) {
                 </span>
               </span>
               <div className="absolute inset-x-0 bottom-0 z-[1] p-1.5 sm:p-2.5">
-                <h3 className="line-clamp-2 text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm">
-                  {m.title}
+                <h3 className="font-en line-clamp-2 text-center text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm" dir="ltr">
+                  {m.titleEn || m.title}
                 </h3>
-                <p className="mt-0.5 flex items-center gap-1 text-[10px] text-white/70 sm:text-[11px]">
+                <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] text-white/70 sm:text-[11px]">
                   <Star className="size-2.5 fill-[var(--star)] text-[var(--star)] sm:size-3" />
                   <span className="text-white/90">{fa(m.rating.toFixed(1))}</span>
                 </p>
                 {m.award ? (
-                  <p className="mt-0.5 truncate text-[10px] text-[var(--brand)] sm:text-[11px]">{m.award}</p>
+                  <p className="mt-0.5 truncate text-center text-[10px] text-[var(--brand)] sm:text-[11px]">{m.award}</p>
                 ) : null}
               </div>
             </div>

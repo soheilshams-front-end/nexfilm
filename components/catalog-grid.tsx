@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
+import { Clapperboard } from 'lucide-react'
 import type { Movie } from '@/lib/movies'
 import { movieToPosterTitle, PosterCard } from '@/components/saintstream/poster-card'
-import { Button } from '@/components/untitled/button'
+import { EmptyState } from '@/components/empty-state'
 
 export function CatalogGrid({
   items,
@@ -18,12 +18,14 @@ export function CatalogGrid({
 }) {
   if (!items.length) {
     return (
-      <div className="flex flex-col items-center py-16 text-center">
-        <p className="text-lg font-medium text-white">{emptyLabel}</p>
-        <Button asChild className="mt-6">
-          <Link href={emptyHref}>{emptyCta}</Link>
-        </Button>
-      </div>
+      <EmptyState
+        icon={Clapperboard}
+        title={emptyLabel}
+        description="عنوان دیگری را امتحان کنید یا به آرشیو سر بزنید."
+        actionHref={emptyHref}
+        actionLabel={emptyCta}
+        className="py-16"
+      />
     )
   }
 

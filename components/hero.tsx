@@ -33,8 +33,8 @@ export function Hero({ movie }: { movie: Movie }) {
             </span>
           )}
 
-          <h1 className="mt-4 text-balance font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            {movie.title}
+          <h1 className="font-en mt-4 text-end text-balance text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl" dir="ltr">
+            {movie.titleEn || movie.title}
           </h1>
 
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">

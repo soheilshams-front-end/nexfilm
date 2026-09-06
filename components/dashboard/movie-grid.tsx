@@ -47,10 +47,10 @@ export function DashboardMovieCard({ movie, showProgress }: { movie: Movie; show
         />
 
         <div className="absolute inset-x-0 bottom-0 z-[1] p-1.5 sm:p-3">
-          <h4 className="line-clamp-2 text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm">
-            {movie.title}
+          <h4 className="font-en line-clamp-2 text-center text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm" dir="ltr">
+            {movie.titleEn || movie.title}
           </h4>
-          <p className="mt-0.5 flex items-center gap-1 text-[10px] text-white/70 sm:mt-1 sm:gap-1.5 sm:text-[11px]">
+          <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] text-white/70 sm:mt-1 sm:gap-1.5 sm:text-[11px]">
             <Star className="size-2.5 fill-[var(--star)] text-[var(--star)] sm:size-3" />
             <span className="text-white/90">{fa(movie.rating.toFixed(1))}</span>
             <span aria-hidden className="hidden text-white/35 sm:inline">

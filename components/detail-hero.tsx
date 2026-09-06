@@ -67,11 +67,16 @@ export function DetailHero({ movie }: { movie: Movie }) {
             transition={{ duration: 0.45 }}
           >
             {movie.titleEn && movie.titleEn !== movie.title ? (
-              <p className="text-[13px] font-medium tracking-wide text-white/45" dir="ltr">
+              <p className="font-en text-end text-[13px] font-medium tracking-wide text-white/45" dir="ltr">
                 {movie.titleEn}
               </p>
             ) : null}
-            <h1 className="mt-1 text-balance text-[clamp(1.7rem,6vw,3.6rem)] font-bold leading-[1.1] text-white">
+            <h1
+              className={`mt-1 text-balance text-[clamp(1.7rem,6vw,3.6rem)] font-bold leading-[1.1] text-white${
+                !movie.titleEn || movie.titleEn === movie.title ? ' font-en text-end' : ''
+              }`}
+              dir={!movie.titleEn || movie.titleEn === movie.title ? 'ltr' : undefined}
+            >
               {movie.title}
             </h1>
 

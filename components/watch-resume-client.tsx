@@ -13,18 +13,19 @@ export function WatchResumeClient({
   episodeId,
 }: {
   movie: Movie
-  playbackUrl: string
+  playbackUrl?: string
   nextEpisode?: { title: string; href: string }
   seasonId?: number
   episodeId?: number
 }) {
   const resumeSeconds = useMemo(() => {
+    if (!playbackUrl) return undefined
     const item = getContinueWatching().find((c) => c.movieId === movie.id)
     if (!item) return undefined
     if (seasonId != null && item.seasonId != null && item.seasonId !== seasonId) return undefined
     if (episodeId != null && item.episodeId != null && item.episodeId !== episodeId) return undefined
     return item.seconds
-  }, [movie.id, seasonId, episodeId])
+  }, [movie.id, seasonId, episodeId, playbackUrl])
 
   return (
     <VideoPlayer

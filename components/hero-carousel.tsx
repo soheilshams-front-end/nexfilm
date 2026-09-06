@@ -102,7 +102,7 @@ export function HeroCarousel({
             </Badge>
 
             <h1
-              className="text-balance text-[clamp(1.65rem,6vw,3.5rem)] font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+              className="font-en text-end text-balance text-[clamp(1.65rem,6vw,3.5rem)] font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
               dir="ltr"
             >
               {movie.titleEn || movie.titleFa}

@@ -36,9 +36,9 @@ export function MovieRow({
   }, [])
 
   return (
-    <section className="reveal py-4 md:py-9">
+    <section className="shelf-section reveal py-4 md:py-9">
       <SectionHeader title={title} href={href} />
-      <div className="relative md:mask-fade-x">
+      <div className="shelf-hover-zone relative">
         <div
           ref={scroller}
           role="list"
@@ -46,7 +46,7 @@ export function MovieRow({
           onKeyDown={onKeyDown}
           aria-label={title}
           className={cn(
-            'shelf-track no-scrollbar flex gap-2 overflow-x-auto px-[var(--space-page-x)] pb-2 pt-1 sm:gap-4 md:gap-6',
+            'shelf-track no-scrollbar flex gap-2 px-[var(--space-page-x)] sm:gap-4 md:gap-6',
             '[scroll-snap-type:x_mandatory]',
           )}
         >
@@ -64,7 +64,7 @@ export function MovieRow({
               )}
             />
           ))}
-          <div className="w-px shrink-0" aria-hidden />
+          <div className="w-[var(--shelf-hover-pad)] shrink-0" aria-hidden />
         </div>
       </div>
     </section>

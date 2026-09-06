@@ -35,7 +35,7 @@ export default async function SeriesDetailsPage({
       <div className="relative z-10 -mt-6 w-full min-w-0 space-y-8 overflow-x-hidden bg-gradient-to-b from-transparent via-black to-black pb-10 sm:-mt-10 sm:space-y-12">
         <div className="page-max page-pad grid w-full min-w-0 gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(220px,0.7fr)] lg:gap-10">
           <div className="w-full min-w-0 space-y-8">
-            <section className="w-full min-w-0 max-w-full overflow-hidden rounded-[14px] bg-white/[0.03] p-2.5 ring-1 ring-white/10 sm:rounded-[18px] sm:p-4 md:p-5">
+            <section className="reveal is-visible w-full min-w-0 max-w-full overflow-hidden rounded-[14px] bg-white/[0.03] p-2.5 ring-1 ring-white/10 sm:rounded-[18px] sm:p-4 md:p-5">
               <div className="mb-2.5 flex min-w-0 items-baseline justify-between gap-2 sm:mb-4">
                 <h2 className="min-w-0 truncate text-[15px] font-bold text-white sm:text-[1.15rem] md:text-[1.35rem]">
                   قسمت‌ها
@@ -50,7 +50,7 @@ export default async function SeriesDetailsPage({
             <CastSlider titleId={series.id} />
 
             {reviews.length > 0 ? (
-              <section>
+              <section className="reveal is-visible">
                 <h2 className="mb-4 text-[1.15rem] font-bold text-white sm:text-[1.35rem]">نقدها</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {reviews.map((r) => (

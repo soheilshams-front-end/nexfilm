@@ -34,15 +34,15 @@ export function MovieCard({
   }, [movie.id])
 
   return (
-    <div className={cn('group shrink-0', className)}>
+    <div className={cn('focus-tile group shrink-0', className)}>
       <Link
         href={detailHref}
         className={cn(
-          'relative block overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] outline-none ring-1 ring-[var(--border-secondary)]',
+          'relative block rounded-[var(--radius-card)] bg-[var(--bg-secondary)] outline-none',
         )}
         tabIndex={0}
       >
-        <div className={cn('relative w-full overflow-hidden', aspect)}>
+        <div className={cn('focus-tile-media relative w-full overflow-hidden rounded-[var(--radius-card)] ring-1 ring-[var(--border-secondary)]', aspect)}>
           <img
             src={movie.poster || '/placeholder.svg'}
             alt={`پوستر ${movie.title}`}
@@ -88,10 +88,10 @@ export function MovieCard({
             </div>
 
             <div className="relative z-[1]">
-              <h3 className="line-clamp-2 text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm">
-                {movie.title}
+              <h3 className="font-en line-clamp-2 text-center text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-sm" dir="ltr">
+                {movie.titleEn || movie.title}
               </h3>
-              <p className="mt-0.5 flex items-center gap-1 text-[10px] text-white/70 sm:mt-1 sm:gap-1.5 sm:text-[11px]">
+              <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] text-white/70 sm:mt-1 sm:gap-1.5 sm:text-[11px]">
                 <Star className="size-2.5 shrink-0 fill-[var(--star)] text-[var(--star)] sm:size-3" />
                 <span className="text-white/90">{fa(movie.rating.toFixed(1))}</span>
                 {episodeLabel ? (

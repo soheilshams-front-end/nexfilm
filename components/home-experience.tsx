@@ -11,9 +11,11 @@ export function HomeExperience() {
   const slides = saintstreamHome.heroSlides
 
   return (
-    <div className="home-page-bg relative min-h-screen overflow-hidden">
+    <div className="home-page-bg relative min-h-screen">
       <div className="relative z-10">
-        <HeroCarousel slides={slides} index={index} onIndexChange={setIndex} />
+        <div className="overflow-x-clip">
+          <HeroCarousel slides={slides} index={index} onIndexChange={setIndex} />
+        </div>
         <HomeContent />
         <SiteFooter className="relative z-10 bg-transparent" />
       </div>

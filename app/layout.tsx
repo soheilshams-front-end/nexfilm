@@ -6,11 +6,27 @@ import { SearchProvider } from '@/components/search-provider'
 import { SearchModalLazy } from '@/components/search-modal-lazy'
 import { ToastProvider } from '@/components/toast-provider'
 
-const yekanBakh = localFont({
-  src: './fonts/YekanBakh-VF.woff2',
-  variable: '--font-yekan',
+const peyda = localFont({
+  src: [
+    { path: './fonts/Peyda-Thin.ttf', weight: '100', style: 'normal' },
+    { path: './fonts/peyda-extralight.ttf', weight: '200', style: 'normal' },
+    { path: './fonts/peyda-light.ttf', weight: '300', style: 'normal' },
+    { path: './fonts/Peyda-Regular.ttf', weight: '400', style: 'normal' },
+    { path: './fonts/Peyda-Medium.ttf', weight: '500', style: 'normal' },
+    { path: './fonts/Peyda-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: './fonts/Peyda-Bold.ttf', weight: '700', style: 'normal' },
+    { path: './fonts/Peyda-ExtraBold.ttf', weight: '800', style: 'normal' },
+    { path: './fonts/Peyda-Black.ttf', weight: '900', style: 'normal' },
+  ],
+  variable: '--font-peyda',
   display: 'swap',
-  weight: '100 900',
+})
+
+const bebasNeue = localFont({
+  src: './fonts/BebasNeue-Regular.ttf',
+  variable: '--font-bebas',
+  display: 'swap',
+  weight: '400',
 })
 
 export const metadata: Metadata = {
@@ -35,8 +51,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fa" dir="rtl" className={`dark bg-background ${yekanBakh.variable}`}>
-      <body className={`${yekanBakh.className} font-sans antialiased`}>
+    <html
+      lang="fa"
+      dir="rtl"
+      className={`dark bg-background ${peyda.variable} ${bebasNeue.variable}`}
+    >
+      <body className={`${peyda.className} font-sans antialiased`}>
         <SearchProvider>
           <ToastProvider>
             {children}

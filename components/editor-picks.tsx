@@ -39,7 +39,9 @@ export function EditorPicks() {
                 <Quote className="size-3" />
                 انتخاب {fa(i + 1)}
               </span>
-              <h3 className="mt-3 text-2xl font-bold text-white sm:text-3xl">{movie.title}</h3>
+              <h3 className="font-en mt-3 text-end text-2xl font-bold text-white sm:text-3xl" dir="ltr">
+                {movie.titleEn || movie.title}
+              </h3>
               <p className="mt-2 text-sm italic text-white/80">«{note}»</p>
               <span className="mt-4 inline-flex items-center gap-2 rounded bg-primary px-4 py-2 text-sm font-semibold text-white">
                 <Play className="size-4 fill-current" />

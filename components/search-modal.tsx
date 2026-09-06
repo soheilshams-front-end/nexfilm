@@ -243,7 +243,9 @@ export function SearchModal() {
                           >
                             <img src={m.poster} alt="" className="size-10 shrink-0 rounded object-cover" />
                             <div className="min-w-0 flex-1">
-                              <p className="truncate text-sm text-white/90">{m.title}</p>
+                              <p className="font-en truncate text-start text-sm text-white/90" dir="ltr">
+                                {m.titleEn || m.title}
+                              </p>
                               <p className="text-xs text-white/40">{fa(m.year)}</p>
                             </div>
                           </Link>
@@ -299,7 +301,9 @@ function SearchResultRow({
       >
         <img src={m.poster} alt="" className="size-12 shrink-0 rounded object-cover" />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-white">{m.title}</p>
+          <p className="font-en truncate text-start text-sm font-medium text-white" dir="ltr">
+            {m.titleEn || m.title}
+          </p>
           <p className="truncate text-xs text-white/45">
             {m.type === 'Series' ? 'سریال' : 'فیلم'}
             {m.year ? ` • ${fa(m.year)}` : ''}

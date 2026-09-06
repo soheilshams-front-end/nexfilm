@@ -23,5 +23,7 @@ export default async function SearchPage({
       )
     : []
 
-  return <SearchResults term={term} results={results} />
+  const suggestions = [...catalog].sort((a, b) => b.rating - a.rating).slice(0, 12)
+
+  return <SearchResults term={term} results={results} suggestions={suggestions} />
 }

@@ -117,9 +117,16 @@ export function HomeContent() {
           <ContinueWatchingRow />
           <MovieScroller title={filterLabel(filter)} items={filtered} href="/browse" />
           {filtered.length === 0 ? (
-            <p className="page-pad page-max pb-16 text-center text-sm text-white/50">
-              موردی با این فیلتر پیدا نشد. فیلتر دیگری را امتحان کنید.
-            </p>
+            <div className="page-pad page-max pb-16 text-center">
+              <p className="text-sm text-white/50">موردی با این فیلتر پیدا نشد.</p>
+              <button
+                type="button"
+                onClick={() => setFilter(DEFAULT_FILTER)}
+                className="mt-3 rounded-full bg-white/10 px-4 py-2 text-[13px] font-semibold text-white ring-1 ring-white/10 hover:bg-white/16"
+              >
+                پاک کردن فیلتر
+              </button>
+            </div>
           ) : null}
           <PopularWeekRow items={popularWeek} />
         </>

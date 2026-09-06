@@ -25,7 +25,7 @@ function SideList({ title, items }: { title: string; items: SaintstreamTitle[] }
                   <img src={item.poster} alt="" className="size-full object-cover" />
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-[15px] font-medium text-white" dir="ltr">
+                  <p className="font-en truncate text-start text-[15px] font-medium text-white" dir="ltr">
                     {item.titleEn || item.titleFa}
                   </p>
                   <p className="mt-1 inline-flex items-center gap-1 text-[12px] text-[var(--meta-muted)]">
@@ -67,7 +67,7 @@ export function HomeBottomGrid({
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/75 to-transparent" />
           <div className="relative flex min-h-[260px] flex-col justify-end p-4 sm:min-h-[300px] sm:p-6 md:min-h-[320px] md:p-8">
             <Badge color="brand">برنده جایزه</Badge>
-            <h3 className="mt-3 text-balance text-[1.35rem] font-bold text-white sm:mt-4 sm:text-[28px]" dir="ltr">
+            <h3 className="font-en mt-3 text-end text-balance text-[1.35rem] font-bold text-white sm:mt-4 sm:text-[28px]" dir="ltr">
               {award.titleEn || award.titleFa}
             </h3>
             <p className="mt-2 flex flex-wrap items-center gap-2 text-[13px] text-[var(--meta-muted)]">

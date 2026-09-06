@@ -1,13 +1,13 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Link from 'next/link'
 import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react'
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { PageHero } from '@/components/page-hero'
-import { Button } from '@/components/untitled/button'
 import { CatalogGrid } from '@/components/catalog-grid'
+import { SearchQueryForm } from '@/components/search-query-form'
+import { EmptyState } from '@/components/empty-state'
 import type { Movie } from '@/lib/movies'
 import { fa } from '@/lib/format-fa'
 import { getCatalogGenres } from '@/lib/movies'
@@ -19,9 +19,11 @@ type KindFilter = 'all' | 'Film' | 'Series'
 export function SearchResults({
   term,
   results,
+  suggestions = [],
 }: {
   term: string
   results: Movie[]
+  suggestions?: Movie[]
 }) {
   const genres = useMemo(() => getCatalogGenres(), [])
   const [kind, setKind] = useState<KindFilter>('all')
@@ -48,10 +50,7 @@ export function SearchResults({
       />
 
       <div className="page-max page-pad mt-4 flex min-w-0 flex-col gap-2.5 sm:mt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        <div className="uu-panel flex min-w-0 w-full flex-1 items-center gap-2 rounded-lg px-3.5 py-2.5 sm:min-w-[min(100%,20rem)]">
-          <Search className="size-4 shrink-0 text-[var(--fg-quaternary)]" />
-          <span className="truncate text-sm text-[var(--fg-tertiary)]">{term || 'عبارت جستجو…'}</span>
-        </div>
+        <SearchQueryForm initialQuery={term} />
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           <button
             type="button"
@@ -126,19 +125,31 @@ export function SearchResults({
         {filtered.length > 0 ? (
           <CatalogGrid items={filtered} />
         ) : term ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="grid size-20 place-items-center rounded-full bg-[var(--bg-2)] text-[var(--label-2)]">
-              <Search className="size-9" />
-            </div>
-            <p className="mt-5 text-title-2 text-white">نتیجه‌ای یافت نشد</p>
-            <p className="mt-2 max-w-sm text-[15px] text-[var(--label-2)]">
-              برای «{term}» چیزی پیدا نکردیم. عبارت دیگری را امتحان کنید.
-            </p>
-            <Button asChild className="mt-6">
-              <Link href="/">بازگشت به خانه</Link>
-            </Button>
+          <EmptyState
+            icon={Search}
+            title="نتیجه‌ای یافت نشد"
+            description={`برای «${term}» چیزی پیدا نکردیم. عبارت دیگری را امتحان کنید.`}
+            actionHref="/"
+            actionLabel="بازگشت به خانه"
+          />
+        ) : (
+          <div>
+            <EmptyState
+              icon={Search}
+              title="چه می‌خواهید ببینید؟"
+              description="نام فیلم، سریال یا ژانر را بنویسید. از میانبر ⌘K هم می‌توانید جستجو کنید."
+              actionHref="/browse"
+              actionLabel="مرور دسته‌ها"
+              className="py-12"
+            />
+            {suggestions.length ? (
+              <div className="mt-2">
+                <p className="mb-3 text-sm font-semibold text-white/70">پیشنهادهای امروز</p>
+                <CatalogGrid items={suggestions} />
+              </div>
+            ) : null}
           </div>
-        ) : null}
+        )}
       </div>
       <SiteFooter />
     </main>

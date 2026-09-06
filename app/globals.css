@@ -3,15 +3,6 @@
 @import 'shadcn/tailwind.css';
 @plugin "tailwindcss-react-aria-components";
 
-@font-face {
-  font-family: 'Yekan Bakh';
-  src: url('/fonts/YekanBakh-VF.woff2') format('woff2-variations'),
-    url('/fonts/YekanBakh-VF.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -37,8 +28,9 @@
   --color-surface-foreground: var(--surface-foreground);
   --color-elevated: var(--elevated);
 
-  --font-sans: var(--font-yekan), 'Yekan Bakh', ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-yekan), 'Yekan Bakh', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-peyda), 'Peyda', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-peyda), 'Peyda', ui-sans-serif, system-ui, sans-serif;
+  --font-en: var(--font-bebas), 'Bebas Neue', ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
@@ -157,7 +149,8 @@
   --poster-card-w: 108px;
   --poster-gap: 0.5rem;
   --section-py: 1rem;
-  --focus-scale: 1.03;
+  --focus-scale: 1.05;
+  --shelf-hover-pad: 2rem;
   --figma-gutter: 75px;
   --star: #ffd54a;
   --meta-muted: #94a0b0;
@@ -193,13 +186,26 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: clip;
   }
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
-    overflow-x: clip;
     max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* English / Latin display titles — Bebas Neue via --font-bebas */
+  .font-en {
+    font-family: var(--font-en) !important;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+
+  /* Player LTR chrome (clocks, rates, Latin cues) */
+  .nf-player .font-en,
+  .nf-player [data-en='true'] {
+    font-family: var(--font-en) !important;
+    letter-spacing: 0.04em;
   }
   ::selection {
     background: rgba(var(--brand-rgb), 0.35);
@@ -409,23 +415,63 @@
     color: var(--fg-quaternary);
   }
 
-  /* Soft poster hover — Untitled, not Apple TV focus ring */
+  /* Shelf posters: layout box stays put; only the media face scales up */
   .focus-tile {
-    transform-origin: center center;
+    position: relative;
+    z-index: 1;
+    outline: none;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+  .focus-tile-media {
+    transform-origin: center bottom;
     transition:
       transform var(--duration-base) var(--ease-out),
-      box-shadow var(--duration-base) var(--ease-out),
-      opacity var(--duration-base) var(--ease-out);
-    outline: none;
+      box-shadow var(--duration-base) var(--ease-out);
+    will-change: transform;
   }
   .focus-tile:hover,
-  .focus-tile:focus-visible {
-    transform: none;
-    z-index: 2;
-    box-shadow: var(--elevation-2);
+  .focus-tile:focus-visible,
+  .focus-tile:focus-within {
+    z-index: 60;
   }
-  .shelf-track:has(.focus-tile:focus-visible) .focus-tile:not(:focus-visible) {
-    opacity: 1;
+  .focus-tile:hover .focus-tile-media,
+  .focus-tile:focus-visible .focus-tile-media,
+  .focus-tile:focus-within .focus-tile-media {
+    transform: scale(var(--focus-scale, 1.05));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    outline: 2px solid rgba(var(--brand-rgb), 0.55);
+    outline-offset: 2px;
+  }
+
+  /* Hover bleed: pad inside overflow scroller, pull back with negative margin so gaps stay */
+  .shelf-section {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+  .shelf-section:hover,
+  .shelf-section:focus-within {
+    z-index: 40;
+  }
+  .shelf-hover-zone {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+  .shelf-hover-zone:hover,
+  .shelf-hover-zone:focus-within {
+    z-index: 40;
+  }
+  .shelf-track {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: var(--shelf-hover-pad, 1.5rem);
+    margin-block: calc(var(--shelf-hover-pad, 1.5rem) * -1);
+    scroll-padding-inline: var(--space-page-x);
+  }
+  .shelf-track:has(.focus-tile:focus-visible) .focus-tile:not(:focus-visible),
+  .shelf-track:has(.focus-tile:hover) .focus-tile:not(:hover):not(:focus-visible) {
+    opacity: 0.72;
   }
 
   .btn-filled {
@@ -597,6 +643,11 @@
   .focus-tile:focus-visible {
     transform: none;
   }
+  .focus-tile:hover .focus-tile-media,
+  .focus-tile:focus-visible .focus-tile-media,
+  .focus-tile:focus-within .focus-tile-media {
+    transform: none;
+  }
   .home-ambient-simple {
     background: var(--bg);
   }
@@ -611,11 +662,43 @@
   animation: buffer-ring 0.85s linear infinite;
 }
 
+.nf-player-glass {
+  background: rgba(12, 14, 16, 0.55);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-player .animate-ping,
+  .nf-skip-ripple {
+    animation: none;
+  }
+}
+
+@keyframes skip-ripple {
+  from {
+    opacity: 0.45;
+    transform: translateY(-50%) scale(0.55);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50%) scale(1.35);
+  }
+}
+.nf-skip-ripple {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 70%);
+  animation: skip-ripple 0.55s var(--ease-out) both;
+}
+
 .player-scrubber {
   transition: height 0.15s var(--ease-out);
 }
-.player-scrubber:hover {
-  height: 6px;
+.player-scrubber:hover,
+.player-scrubber:focus-within {
+  height: 7px;
 }
 
 .mini-player {

@@ -58,7 +58,7 @@ export function BrowseGenres({ genres }: { genres: GenreCardData[] }) {
               <p className="text-[11px] font-bold leading-tight tracking-tight text-white sm:text-[15px] md:text-[17px]">
                 {g.name}
               </p>
-              <p className="mt-0.5 line-clamp-1 text-[10px] text-white/55 sm:mt-1 sm:text-[12px]" dir="ltr">
+              <p className="font-en mt-0.5 line-clamp-1 text-center text-[10px] text-white/55 sm:mt-1 sm:text-[12px]" dir="ltr">
                 {g.titleEn || g.titleFa}
               </p>
               <p className="mt-0.5 hidden text-[11px] tabular-nums text-white/40 sm:block">

@@ -52,13 +52,13 @@ export function PosterCard({
     <Link
       href={detailHref}
       tabIndex={0}
-      className={cn('group block shrink-0 snap-start outline-none', widthClass, className)}
+      className={cn('focus-tile group block shrink-0 snap-start outline-none', widthClass, className)}
     >
-      <div className="relative aspect-[2/3] overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.08] transition-[transform,box-shadow,ring-color] duration-300 sm:group-hover:-translate-y-0.5 sm:group-hover:shadow-[0_14px_32px_rgba(0,0,0,0.4)] sm:group-hover:ring-[rgba(29,214,111,0.35)]">
+      <div className="relative aspect-[2/3] focus-tile-media overflow-hidden rounded-[var(--radius-card)] bg-[var(--bg-secondary)] ring-1 ring-white/[0.08]">
         <img
           src={title.poster}
           alt={displayTitle}
-          className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.04]"
+          className="size-full object-cover transition-transform duration-500 ease-out sm:group-hover:scale-[1.03]"
           loading="lazy"
           onError={(e) => {
             e.currentTarget.src = '/placeholder.svg'
@@ -76,12 +76,12 @@ export function PosterCard({
 
         <div className="absolute inset-x-0 bottom-0 z-[1] p-1.5 sm:p-3.5 md:p-4">
           <h3
-            className="line-clamp-2 text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-[14px] md:text-[15px]"
+            className="font-en line-clamp-2 text-center text-[11px] font-semibold leading-snug text-white drop-shadow-sm sm:text-[14px] md:text-[15px]"
             dir="ltr"
           >
             {displayTitle}
           </h3>
-          <p className="mt-0.5 flex items-center gap-1 text-[10px] tracking-wide text-white/70 sm:mt-1.5 sm:gap-1.5 sm:text-[11px] md:text-[12px]">
+          <p className="mt-0.5 flex items-center justify-center gap-1 text-[10px] tracking-wide text-white/70 sm:mt-1.5 sm:gap-1.5 sm:text-[11px] md:text-[12px]">
             <Star className="size-2.5 shrink-0 fill-[var(--star)] text-[var(--star)] sm:size-3" />
             <span className="text-white/90">{fa(title.rating.toFixed(1))}</span>
             <span aria-hidden className="hidden text-white/35 sm:inline">
